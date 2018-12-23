@@ -7,35 +7,70 @@ using Sirenix.OdinInspector;
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider))]
 public class FPSPlayerController : PlayerController
 {
-    [SerializeField] private Transform playerCamera;
     
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
     [SerializeField, FoldoutGroup("Checking Ground")]
     private LayerMask groundLayer;
 
     [SerializeField,FoldoutGroup("Checking Ground")] 
     private float playerHeight;
 
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////// 
+    
     [SerializeField,ReadOnly,FoldoutGroup("Information")]
     private bool canMove = true;
     [SerializeField,ReadOnly,FoldoutGroup("Information")]
     private bool isRunning = false;
+    [SerializeField,ReadOnly,FoldoutGroup("Information")]
+    private bool onGround = true;
+    [SerializeField,ReadOnly,FoldoutGroup("Information")]
+    private bool ignoreGround = false;
+    [SerializeField,FoldoutGroup("Information")]
+    private bool isJumping = false;
+    
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
     
     [SerializeField,FoldoutGroup("Movement")]
     private float moveSpeed = 5f;
     [SerializeField,FoldoutGroup("Movement")]
     private float runSpeed = 7f;
     
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    
+    [SerializeField,FoldoutGroup("Looking"), Required] 
+    private Transform playerCamera;
     [SerializeField,FoldoutGroup("Looking")]
     private float lookMultiplier = 1f;
     [SerializeField,FoldoutGroup("Looking")]
     private float maxLookAngle = 90f;
 
     private Quaternion startCameraRotation;
+    
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    
+    [SerializeField,FoldoutGroup("Jumping")]
+    private float jumpForce = 90f;
+    
+
+    private float jumpDelta;
 
     private new Transform transform;
     private new Rigidbody rigidbody;
     private new Collider collider;
     
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
 
     protected override void Start()
     {
@@ -45,13 +80,17 @@ public class FPSPlayerController : PlayerController
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
 
+        //Init default values
         startCameraRotation = playerCamera.localRotation;
+        
         isRunning = false;
+        ignoreGround = false;
+        canMove = true;
     }
 
     protected virtual void Update()
     {
-        
+        onGround = IsOnGround();
     }
 
     protected override void InitControls()
@@ -69,6 +108,9 @@ public class FPSPlayerController : PlayerController
         ProcessLook();
         ProcessMove();
         
+        if(isJumping || onGround == false)
+            ProcessFalling();
+
     }
 
     protected override void InitState(STATE newState)
@@ -143,9 +185,41 @@ public class FPSPlayerController : PlayerController
 
     }
 
+    void ProcessFalling()
+    {
+        var position = rigidbody.position;
+        
+        rigidbody.MovePosition(Vector3.MoveTowards(
+            position, 
+            position + (Vector3.up * 2f),
+            jumpDelta * Time.fixedDeltaTime));
+        
+        //Assuming that Gravity is always forcing down
+        jumpDelta += Physics.gravity.y * Time.fixedDeltaTime;
+
+        if (ignoreGround)
+            return;
+        
+        if (IsOnGround())
+        {
+            isJumping = false;
+            canMove = true;
+            jumpDelta = 0f;
+        }
+    }
+
     protected override void Jump()
     {
-        throw new System.NotImplementedException();
+        if (IsOnGround() == false)
+            return;
+        
+        jumpDelta = jumpForce;
+        canMove = false;
+        isJumping = true;
+
+        StartCoroutine(WaitCoroutine(
+            () => { ignoreGround = true; },
+            () => { ignoreGround = false; }));
     }
 
     protected override void Fire()
@@ -184,9 +258,9 @@ public class FPSPlayerController : PlayerController
         var position = transform.position;
         var up = transform.up;
         
-        Debug.DrawRay(position, -up.normalized * 1.2f, Color.green);
+        Debug.DrawRay(position, -up.normalized*playerHeight, Color.green);
         
-        return Physics.Raycast(position, up, playerHeight * 1.2f, groundLayer.value);
+        return Physics.Raycast(position, -up, playerHeight, groundLayer.value);
     }
 
     protected Vector3 GetDirection()
@@ -197,5 +271,16 @@ public class FPSPlayerController : PlayerController
         _out += transform.right * mMove.x;
 
         return _out.normalized;
+    }
+
+    private IEnumerator WaitCoroutine(Action onStart, Action onEnd)
+    {
+        if (onStart != null)
+            onStart();
+        
+        yield return new WaitForSeconds(0.2f);
+        
+        if (onEnd != null)
+            onEnd();
     }
 }

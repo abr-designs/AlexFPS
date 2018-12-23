@@ -293,16 +293,20 @@ MonoBehaviour:
     m_Asset: {fileID: 11400000, guid: 3930ade5fa52106469bcc5f9f29ddb08, type: 3}
   mMove: {x: 0, y: 0}
   mLook: {x: 0, y: 0}
-  playerCamera: {fileID: 534669905}
   groundLayer:
     serializedVersion: 2
     m_Bits: 512
-  playerHeight: 1
+  playerHeight: 1.1
   canMove: 1
   isRunning: 1
+  onGround: 1
+  isJumping: 0
   moveSpeed: 5
   runSpeed: 7
+  playerCamera: {fileID: 534669905}
   lookMultiplier: 1
+  maxLookAngle: 90
+  jumpForce: 5
 --- !u!4 &522747322
 Transform:
   m_ObjectHideFlags: 0
@@ -413,7 +417,7 @@ GameObject:
   - component: {fileID: 1000963197}
   - component: {fileID: 1000963196}
   - component: {fileID: 1000963195}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LevelGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
