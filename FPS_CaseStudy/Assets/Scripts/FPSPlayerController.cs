@@ -40,6 +40,9 @@ public class FPSPlayerController : PlayerController
     private float moveSpeed = 5f;
     [SerializeField,FoldoutGroup("Movement")]
     private float runSpeed = 7f;
+
+    private Vector3 moveDelta;
+    private Vector3 fallDelta;
     
     /////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
@@ -103,13 +106,18 @@ public class FPSPlayerController : PlayerController
 
     private void FixedUpdate()
     {
+        //moveDelta = Vector3.zero;
+        fallDelta = Vector3.zero;
         
         //FIXME Think that i would prefer to have this in the Normal Update Loop
         ProcessLook();
         ProcessMove();
         
-        if(isJumping || onGround == false)
-            ProcessFalling();
+        ProcessFalling();
+            
+
+
+        rigidbody.position += (moveDelta + fallDelta) * Time.fixedDeltaTime;
 
     }
 
@@ -155,16 +163,21 @@ public class FPSPlayerController : PlayerController
     {
         if (canMove == false)
             return;
-        
+
         if (mMove == Vector2.zero)
+        {
+            moveDelta = Vector3.zero;
             return;
+        }
 
         var position = rigidbody.position;
+
+        moveDelta = GetDirection() * (isRunning ? runSpeed : moveSpeed);
         
-        rigidbody.MovePosition(Vector3.MoveTowards(
-            position, 
-            position + (GetDirection() * 2f),
-            (isRunning ? runSpeed : moveSpeed) * Time.fixedDeltaTime));
+        //rigidbody.MovePosition(Vector3.MoveTowards(
+        //    position, 
+        //    position + (GetDirection() * 2f),
+        //    (isRunning ? runSpeed : moveSpeed) * Time.fixedDeltaTime));
     }
 
     protected override void ProcessLook()
@@ -189,11 +202,13 @@ public class FPSPlayerController : PlayerController
     {
         var position = rigidbody.position;
         
-        rigidbody.MovePosition(Vector3.MoveTowards(
-            position, 
-            position + (Vector3.up * 2f),
-            jumpDelta * Time.fixedDeltaTime));
+        fallDelta = Vector3.up * jumpDelta;
         
+        //rigidbody.MovePosition(Vector3.MoveTowards(
+        //    position, 
+        //    position + (Vector3.up * 2f),
+        //    jumpDelta * Time.fixedDeltaTime));
+        //
         //Assuming that Gravity is always forcing down
         jumpDelta += Physics.gravity.y * Time.fixedDeltaTime;
 
