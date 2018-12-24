@@ -142,6 +142,20 @@ public class FPSPlayerController : PlayerController
         
         test.Gameplay.Crouch.Enable();
         test.Gameplay.Crouch.performed += ctx => { Crouch(ctx.ReadValue<float>()); };
+        
+        #if UNITY_EDITOR
+        
+        test.Debugging.Time.Enable();
+        test.Debugging.Time.performed += ctx => { AdjustTimeScale(ctx.ReadValue<float>()); };
+        
+        test.Debugging.Pause.Enable();
+        test.Debugging.Pause.performed += ctx =>
+        {
+            UnityEditor.EditorApplication.isPaused = ctx.ReadValue<float>() == 1f;
+            
+        };
+        
+        #endif
     }
 
     #region Controls
@@ -272,4 +286,21 @@ public class FPSPlayerController : PlayerController
         if (onEnd != null)
             onEnd();
     }
+    
+    #region Debugging
+    #if UNITY_EDITOR
+
+    private void AdjustTimeScale(float amount)
+    {
+        if (amount < 0f)
+            Time.timeScale /= 2f;
+        else
+            Time.timeScale *= 2f;
+        
+        Debug.Log("Set TimeScale to: " + Time.timeScale);
+    }
+    
+    #endif
+    #endregion //Debugging
+    
 }

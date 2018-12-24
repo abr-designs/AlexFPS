@@ -26,6 +26,10 @@ public class FPSControls : InputActionAssetReference
         m_Gameplay_Fire = m_Gameplay.GetAction("Fire");
         m_Gameplay_Sprint = m_Gameplay.GetAction("Sprint");
         m_Gameplay_Crouch = m_Gameplay.GetAction("Crouch");
+        // Debugging
+        m_Debugging = asset.GetActionMap("Debugging");
+        m_Debugging_Pause = m_Debugging.GetAction("Pause");
+        m_Debugging_Time = m_Debugging.GetAction("Time");
         m_Initialized = true;
     }
     private void Uninitialize()
@@ -37,6 +41,9 @@ public class FPSControls : InputActionAssetReference
         m_Gameplay_Fire = null;
         m_Gameplay_Sprint = null;
         m_Gameplay_Crouch = null;
+        m_Debugging = null;
+        m_Debugging_Pause = null;
+        m_Debugging_Time = null;
         m_Initialized = false;
     }
     public void SetAsset(InputActionAsset newAsset)
@@ -80,6 +87,31 @@ public class FPSControls : InputActionAssetReference
         {
             if (!m_Initialized) Initialize();
             return new GameplayActions(this);
+        }
+    }
+    // Debugging
+    private InputActionMap m_Debugging;
+    private InputAction m_Debugging_Pause;
+    private InputAction m_Debugging_Time;
+    public struct DebuggingActions
+    {
+        private FPSControls m_Wrapper;
+        public DebuggingActions(FPSControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause { get { return m_Wrapper.m_Debugging_Pause; } }
+        public InputAction @Time { get { return m_Wrapper.m_Debugging_Time; } }
+        public InputActionMap Get() { return m_Wrapper.m_Debugging; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled { get { return Get().enabled; } }
+        public InputActionMap Clone() { return Get().Clone(); }
+        public static implicit operator InputActionMap(DebuggingActions set) { return set.Get(); }
+    }
+    public DebuggingActions @Debugging
+    {
+        get
+        {
+            if (!m_Initialized) Initialize();
+            return new DebuggingActions(this);
         }
     }
 }

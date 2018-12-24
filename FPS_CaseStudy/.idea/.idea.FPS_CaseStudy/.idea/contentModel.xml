@@ -221,8 +221,17 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="FPSPlayerController.cs" t="Include" />
-          <e p="PlayerController.cs" t="Include" />
+          <e p="KillableArmour.cs" t="Include" />
+          <e p="KillableBase.cs" t="Include" />
+          <e p="Pickups" t="Include">
+            <e p="HealthPickup.cs" t="Include" />
+            <e p="PickupArmour.cs" t="Include" />
+            <e p="PickupBase.cs" t="Include" />
+          </e>
+          <e p="PlayerController" t="Include">
+            <e p="FPSPlayerController.cs" t="Include" />
+            <e p="PlayerController.cs" t="Include" />
+          </e>
         </e>
       </e>
       <e p="FPS_CaseStudy.sln" t="IncludeFlat" />

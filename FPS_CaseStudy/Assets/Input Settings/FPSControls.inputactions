@@ -296,6 +296,74 @@
                     "modifiers": ""
                 }
             ]
+        },
+        {
+            "name": "Debugging",
+            "id": "b7d67865-d970-4272-af42-79e25663d53c",
+            "actions": [
+                {
+                    "name": "Pause",
+                    "id": "15b34f6f-4378-48a3-ac5e-11315348e1d8",
+                    "expectedControlLayout": "",
+                    "bindings": []
+                },
+                {
+                    "name": "Time",
+                    "id": "809352c9-1c95-478e-83e2-73af49009c10",
+                    "expectedControlLayout": "",
+                    "bindings": []
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "Axis",
+                    "path": "Axis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Time",
+                    "chainWithPrevious": false,
+                    "isComposite": true,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "negative",
+                    "path": "<Keyboard>/leftBracket",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Time",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": true,
+                    "modifiers": ""
+                },
+                {
+                    "name": "positive",
+                    "path": "<Keyboard>/rightBracket",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Time",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": true,
+                    "modifiers": ""
+                }
+            ]
         }
     ],
     "controlSchemes": []
