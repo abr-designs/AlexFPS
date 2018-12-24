@@ -7,13 +7,6 @@ using UnityEngine.Experimental.Input;
 
 public abstract class PlayerController : MonoBehaviour
 {
-    protected enum STATE
-    {
-        IDLE,
-        RUN,
-        RELOAD,
-        JUMP
-    }
     [SerializeField]
     protected FPSControls test;
 
@@ -22,8 +15,6 @@ public abstract class PlayerController : MonoBehaviour
     [SerializeField,ReadOnly,FoldoutGroup("Information")]
     protected Vector2 mLook;
 
-    protected STATE currentState;
-    
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -45,9 +36,6 @@ public abstract class PlayerController : MonoBehaviour
         test.Gameplay.Fire.Enable();
         test.Gameplay.Fire.performed += ctx => Fire();
     }
-
-    protected abstract void InitState(STATE newState);
-    protected abstract void ProcessStates();
 
     protected abstract void ProcessMove();
     protected abstract void ProcessLook();

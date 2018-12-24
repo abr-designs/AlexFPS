@@ -8,6 +8,7 @@ ScriptedImporter:
     11400006: Gameplay/Fire
     11400008: Gameplay/Sprint
     11400010: Gameplay/Look
+    11400012: Gameplay/Crouch
   externalObjects: {}
   userData: 
   assetBundleName: 

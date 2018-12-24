@@ -34,6 +34,12 @@
                     "id": "936120d5-ffce-4c5b-8276-ef79eed4b71c",
                     "expectedControlLayout": "",
                     "bindings": []
+                },
+                {
+                    "name": "Crouch",
+                    "id": "adfc1e08-ca30-403a-9b60-34d6270d6186",
+                    "expectedControlLayout": "",
+                    "bindings": []
                 }
             ],
             "bindings": [
@@ -260,6 +266,30 @@
                     "processors": "",
                     "groups": "",
                     "action": "Look",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "right",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "right",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
                     "chainWithPrevious": false,
                     "isComposite": false,
                     "isPartOfComposite": false,
