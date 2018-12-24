@@ -89,7 +89,7 @@ MonoBehaviour:
     Key: Materials
     SmallIcon: {fileID: 2800000, guid: 0508340b76cfbdd43826ca620f578abd, type: 3}
     LargeIcon: {fileID: 2800000, guid: a4decc2460e61e44b9ccd3d2d248738b, type: 3}
-    IsIconRecursive: 0
+    IsIconRecursive: 1
     IsIconCustom: 0
     Background: {fileID: 0}
     IsBackgroundRecursive: 0
@@ -116,7 +116,7 @@ MonoBehaviour:
     Key: Prefabs
     SmallIcon: {fileID: 2800000, guid: 483d693b3f9d5704b89409016b40bc74, type: 3}
     LargeIcon: {fileID: 2800000, guid: fac7470563f79024ebc244b39080448d, type: 3}
-    IsIconRecursive: 0
+    IsIconRecursive: 1
     IsIconCustom: 0
     Background: {fileID: 0}
     IsBackgroundRecursive: 0

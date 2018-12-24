@@ -89,6 +89,7 @@ public class FPSPlayerController : PlayerController
     /////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
 
+    private Equipment equipment;
     private new Transform transform;
     private new Rigidbody rigidbody;
     private new Collider collider;
@@ -104,6 +105,7 @@ public class FPSPlayerController : PlayerController
         transform = gameObject.transform;
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
+        equipment = GetComponent<Equipment>();
 
         //Init default values
         startCameraRotation = playerCamera.localRotation;
@@ -239,7 +241,7 @@ public class FPSPlayerController : PlayerController
 
     protected override void Fire()
     {
-        throw new System.NotImplementedException();
+       equipment.Fire(playerCamera.forward);
     }
 
     protected override void Reload()
