@@ -16,12 +16,17 @@ public class ScriptableGun : ScriptableObject
    [Header("Reload Information")] 
    public int ammoID;
    public float fireCooldown;
+
+   public float muzzleFlashTime = 0.1f;
    //TODO Need to think if i even want reloading in the game
-   public float reloadTime;
-   public int magazineSize;
+   //public float reloadTime;
+   //public int magazineSize;
 
    [Header("Visuals")] 
    public GameObject gunPrefab;
+
+   public GameObject muzzleFlashPrefab;
+   public GameObject bulletHolePrefab;
 
    [Header("Local Transform Information")]
    public Vector3 initialPositionOffset;
@@ -41,10 +46,11 @@ public class ScriptableGun : ScriptableObject
       {
          KillableBase killable = hit.transform.GetComponent<KillableBase>();
          
+         //I want to make sure i do negative health (Damage)
          if(killable)
-            killable.ChangeHealth(damage);
+            killable.ChangeHealth(-damage);
 
-         CreateBulletHole(hit.point);
+         CreateBulletHole(hit.point, hit.normal);
          Debug.DrawLine(position, hit.point, Color.green, 3f);
 
       }
@@ -53,14 +59,12 @@ public class ScriptableGun : ScriptableObject
 
    }
 
-   private void CreateBulletHole(Vector3 position)
+   private void CreateBulletHole(Vector3 position, Vector3 direction)
    {
-      
-   }
-
-   private void CreateMuzzleFlash()
-   {
-      
+      var temp = Instantiate(bulletHolePrefab).transform;
+      temp.position = position + (direction.normalized * 0.05f);
+      temp.localRotation = Quaternion.AngleAxis(Random.Range(0, 360f), direction);
+      temp.forward = -direction;
    }
 
 }

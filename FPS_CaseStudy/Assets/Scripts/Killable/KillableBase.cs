@@ -20,6 +20,7 @@ public class KillableBase : MonoBehaviour
 	public virtual void Kill()
 	{
 		Debug.LogFormat(gameObject, "{0} is ded", gameObject.name);
+		Destroy(gameObject);
 	}
 
 	protected virtual void UpdateUI()

@@ -202,7 +202,7 @@
                 {
                     "name": "right",
                     "path": "<Gamepad>/rightTriggerButton",
-                    "interactions": "",
+                    "interactions": "Hold(repeat)",
                     "processors": "",
                     "groups": "",
                     "action": "Fire",
@@ -214,7 +214,7 @@
                 {
                     "name": "right",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
+                    "interactions": "Hold(duration=0.01,repeat)",
                     "processors": "",
                     "groups": "",
                     "action": "Fire",
