@@ -26,7 +26,7 @@ public class ScriptableGun : ScriptableObject
    public GameObject gunPrefab;
 
    public GameObject muzzleFlashPrefab;
-   public GameObject bulletHolePrefab;
+   //public GameObject bulletHolePrefab;
 
    [Header("Local Transform Information")]
    public Vector3 initialPositionOffset;
@@ -50,7 +50,12 @@ public class ScriptableGun : ScriptableObject
          if(killable)
             killable.ChangeHealth(-damage);
 
-         CreateBulletHole(hit.point, hit.normal);
+         //TODO Need some sort of default material to fallback onto
+         var temp = hit.transform.GetComponent<Shootable>();
+         if(temp)
+            temp.Hit(hit);
+
+         //CreateBulletHole(hit.point, hit.normal);
          Debug.DrawLine(position, hit.point, Color.green, 3f);
 
       }
@@ -59,12 +64,5 @@ public class ScriptableGun : ScriptableObject
 
    }
 
-   private void CreateBulletHole(Vector3 position, Vector3 direction)
-   {
-      var temp = Instantiate(bulletHolePrefab).transform;
-      temp.position = position + (direction.normalized * 0.05f);
-      temp.localRotation = Quaternion.AngleAxis(Random.Range(0, 360f), direction);
-      temp.forward = -direction;
-   }
 
 }

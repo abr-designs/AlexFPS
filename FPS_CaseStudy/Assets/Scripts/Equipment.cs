@@ -86,7 +86,9 @@ public class Equipment : MonoBehaviour, IUIUpdate
 			lastFireTime = Time.time;
 			UpdateUI();
 
-			StartCoroutine(MuzzleFlashCoroutine(currentlyEquipped.muzzleFlashTime));
+			//Trying to prevent the double muzzle flash
+			if(!flashing)
+				StartCoroutine(MuzzleFlashCoroutine(currentlyEquipped.muzzleFlashTime));
 		}
 	}
 
@@ -113,13 +115,16 @@ public class Equipment : MonoBehaviour, IUIUpdate
 		UIManager.Instance.SetAmmo(ammo[currentlyEquipped.ammoID]);
 	}
 
+	private bool flashing = false;
 	private IEnumerator MuzzleFlashCoroutine(float time)
 	{
+		flashing = true;
 		SetParticles(true);
 		
 		yield return new WaitForSeconds(time);
 
 		SetParticles(false);
+		flashing = false;
 	}
 
 	private void SetParticles(bool play)
@@ -129,7 +134,9 @@ public class Equipment : MonoBehaviour, IUIUpdate
 			if(play)
 				muzzleParticles[i].Play();
 			else
+			{
 				muzzleParticles[i].Stop();
+			}
 		}
 	}
 

@@ -214,7 +214,7 @@
                 {
                     "name": "right",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "Hold(duration=0.01,repeat)",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Fire",

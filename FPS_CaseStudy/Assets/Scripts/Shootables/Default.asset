@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97af99118eac3fa4f94e9bd14947cad0, type: 3}
+  m_Name: Default
+  m_EditorClassIdentifier: 
+  createBulletHole: 1
+  bulletHolePrefab: {fileID: 5994855030261012741, guid: 22de0b35faa67484db60ed7aa2473b77,
+    type: 3}
+  bulletStrikeParticlePrefab: {fileID: 100002, guid: e74af37e539075d428c1f7bd8cdb781d,
+    type: 3}

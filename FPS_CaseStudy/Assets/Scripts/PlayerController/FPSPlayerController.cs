@@ -38,6 +38,9 @@ public class FPSPlayerController : PlayerController
 
     [SerializeField, ReadOnly, FoldoutGroup("Information")]
     private bool isJumping = false;
+    
+    [SerializeField, ReadOnly, FoldoutGroup("Information")]
+    private bool isFiring = false;
 
     /////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
@@ -115,6 +118,12 @@ public class FPSPlayerController : PlayerController
         canMove = true;
     }
 
+    private void Update()
+    {
+        if(isFiring)
+            Fire();
+    }
+
     protected virtual void LateUpdate()
     {
         onGround = IsOnGround();
@@ -137,7 +146,18 @@ public class FPSPlayerController : PlayerController
 
     protected override void InitControls()
     {
-        base.InitControls();
+        test.Gameplay.Move.Enable();
+        test.Gameplay.Move.performed += ctx => { mMove = ctx.ReadValue<Vector2>(); };
+        
+        test.Gameplay.Look.Enable();
+        test.Gameplay.Look.performed += ctx => { mLook = ctx.ReadValue<Vector2>(); };
+        
+        test.Gameplay.Jump.Enable();
+        test.Gameplay.Jump.performed += ctx => Jump();
+        
+        test.Gameplay.Fire.Enable();
+        test.Gameplay.Fire.performed += ctx => { isFiring = ctx.ReadValue<float>() == 1f; };
+        //test.Gameplay.Fire.performed += ctx => Fire();
 
         test.Gameplay.Sprint.Enable();
         test.Gameplay.Sprint.performed += ctx => { isRunning = ctx.ReadValue<float>() == 1f; };
