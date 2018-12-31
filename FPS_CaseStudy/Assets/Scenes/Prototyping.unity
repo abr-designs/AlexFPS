@@ -11153,7 +11153,7 @@ PrefabInstance:
         type: 3}
       propertyPath: currentlyEquipped
       value: 
-      objectReference: {fileID: 11400000, guid: 4601ce3e2d9ba2448af5b97e3e7b40f3,
+      objectReference: {fileID: 11400000, guid: 16e0a767011935d4ebbcb88d568690cc,
         type: 2}
     m_RemovedComponents:
     - {fileID: 8192630483782096837, guid: f09f01207cf89ba449f926497ab991b9, type: 3}

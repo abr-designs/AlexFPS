@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d01afc4e0aae1cb44bd2a58307590608, type: 3}
+  m_Name: Pistol
+  m_EditorClassIdentifier: 
+  damage: 15
+  range: 25
+  accuracy: 2
+  damageDropoff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.076562494
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2.688898
+      outSlope: -2.688898
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.035905007
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  repeatable: 0
+  ammoID: 2
+  fireCooldown: 0.15
+  muzzleFlashTime: 0.1
+  gunPrefab: {fileID: 6193054875271213801, guid: 13af9cd80b31c1d44ad91fd3546c4cf3,
+    type: 3}
+  muzzleFlashPrefab: {fileID: 100002, guid: acade480ec18aed4d95a5abc17649351, type: 3}
+  initialPositionOffset: {x: 0, y: -0.287, z: 0.234}
+  initialRotationOffset: {x: 270, y: 0, z: 180}
+  localMuzzleOffset: {x: 0, y: 0.6, z: 0}
