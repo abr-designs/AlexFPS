@@ -11,6 +11,7 @@ public class Equipment : MonoBehaviour, IUIUpdate
 	[Header("Equipment")]
 	public ScriptableGun currentlyEquipped;
 	private Transform gunTransform;
+	private Transform muzzleParticleTransform;
 
 	[SerializeField, ReadOnly]
 	private Dictionary<int, int> ammo;
@@ -45,20 +46,53 @@ public class Equipment : MonoBehaviour, IUIUpdate
 		UpdateUI();
 	}
 
+	public void AddWeapon(ScriptableGun weapon)
+	{
+		if (currentlyEquipped == weapon)
+		{
+			ammo[currentlyEquipped.ammoID] += 25;
+		}
+		else
+		{
+			currentlyEquipped = weapon;
+			
+			if(ammo.ContainsKey(currentlyEquipped.ammoID) == false)
+				ammo.Add(currentlyEquipped.ammoID, 50);
+			else
+				ammo[currentlyEquipped.ammoID] += 25;
+			
+			SpawnGun();
+		}
+		//TODO Check to see if its already equipped
+			//If it is, then we just need to add ammo
+		
+		//TODO If not already equipped, spawn new gun
+		
+		UpdateUI();
+	}
+
 	private void SpawnGun()
 	{
+		//IF there's already a gun equipped, we'll destroy it.
+		//FIXME What i think that should happen is i only disable the object, then that way i only spawn as i need
+		if(gunTransform)
+			Destroy(gunTransform.gameObject);
+		
 		gunTransform = Instantiate(currentlyEquipped.gunPrefab).transform;
 		gunTransform.parent = playerCameraTransform;
 		gunTransform.localPosition = currentlyEquipped.initialPositionOffset;
 		gunTransform.localRotation= Quaternion.Euler(currentlyEquipped.initialRotationOffset);
 		
-		//TODO Need to spawn the Muzzle flash object
-		var temp = Instantiate(currentlyEquipped.muzzleFlashPrefab).transform;
-		temp.parent = playerCameraTransform;
-		temp.position = MuzzlePosition;
-		temp.forward = playerCameraTransform.forward;
+		if(!muzzleParticleTransform)
+			//Creates the instance of the muzzle flash, attaching it to the player as a child object
+			muzzleParticleTransform = Instantiate(currentlyEquipped.muzzleFlashPrefab).transform;
+		
+		//this will reposition the muzzle flash wherever the weapon requires, even if the object already exists
+		muzzleParticleTransform.parent = playerCameraTransform;
+		muzzleParticleTransform.position = MuzzlePosition;
+		muzzleParticleTransform.forward = playerCameraTransform.forward;
 
-		muzzleParticles = temp.GetComponentsInChildren<ParticleSystem>();
+		muzzleParticles = muzzleParticleTransform.GetComponentsInChildren<ParticleSystem>();
 		SetParticles(false);
 		//Need to store them in some sort of array/list
 		//Need a coroutine to actually only play the animation for X amount of time

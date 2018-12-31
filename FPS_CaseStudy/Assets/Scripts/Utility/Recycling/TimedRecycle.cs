@@ -6,19 +6,19 @@ using UnityEngine;
 public class TimedRecycle : MonoBehaviour, IRecyclable
 {
     [SerializeField]
-    private float lifeTime = 10f;
-    private float timeEnabled = 999;
+    protected float lifeTime = 10f;
+    protected float timeEnabled = 999;
 
-    private bool active = false;
+    protected bool active = false;
     // Start is called before the first frame update
-    void OnEnable()
+    protected void OnEnable()
     {
         timeEnabled = Time.time;
         active = true;
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         if (active == false)
             return;
@@ -27,13 +27,13 @@ public class TimedRecycle : MonoBehaviour, IRecyclable
             Recycle();
     }
 
-    public void Recycle()
+    public virtual void Recycle()
     {
         active = false;
         RecycleManager.Recycle<TimedRecycle>(gameObject);
     }
 
-    public void OnRecycled()
+    public virtual void OnRecycled()
     {
         Debug.Log("Recycled", gameObject);
     }

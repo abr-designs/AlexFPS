@@ -12,6 +12,8 @@ public class PickupSpawner : MonoBehaviour
 
     [SerializeField]
     private Vector3 spawnOffset;
+    [SerializeField]
+    private Vector3 spawnRotationOffset;
 
     [SerializeField,Required]
     private GameObject pickupPrefab;
@@ -36,8 +38,9 @@ public class PickupSpawner : MonoBehaviour
     private void SpawnPickup()
     {
         pickupTransform = Instantiate(pickupPrefab).transform;
-        //pickupTransform.parent = transform;
+
         pickupTransform.position = transform.TransformPoint(spawnOffset);
+        pickupTransform.rotation = transform.rotation * Quaternion.Euler(spawnRotationOffset);
     }
 
     private void LateUpdate()

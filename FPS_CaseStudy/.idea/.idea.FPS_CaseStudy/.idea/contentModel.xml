@@ -238,6 +238,7 @@
             <e p="PickupArmour.cs" t="Include" />
             <e p="PickupBase.cs" t="Include" />
             <e p="PickupSpawner.cs" t="Include" />
+            <e p="WeaponPickup.cs" t="Include" />
           </e>
           <e p="PlayerController" t="Include">
             <e p="FPSPlayerController.cs" t="Include" />
@@ -255,6 +256,7 @@
             <e p="Recycling" t="Include">
               <e p="RecycleManager.cs" t="Include" />
               <e p="TimedRecycle.cs" t="Include" />
+              <e p="TimedRecycleName.cs" t="Include" />
             </e>
             <e p="Singleton.cs" t="Include" />
           </e>

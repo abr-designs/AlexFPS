@@ -262,6 +262,10 @@ public class FPSPlayerController : PlayerController
     protected override void Fire()
     {
        equipment.Fire(playerCamera.forward);
+       
+       if (equipment.currentlyEquipped.repeatable == false)
+           isFiring = false;
+       
     }
 
     protected override void Reload()

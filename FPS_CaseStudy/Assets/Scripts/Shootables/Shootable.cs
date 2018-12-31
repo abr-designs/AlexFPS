@@ -19,15 +19,29 @@ public class Shootable : MonoBehaviour
       }
       
       if(shootMaterial.createBulletHole)
-         CreateAt(shootMaterial.bulletHolePrefab, info.point, info.normal, true);
+         CreateAt("BulletHole", shootMaterial.bulletHolePrefab, info.point, info.normal, true);
       
       CreateAt(shootMaterial.bulletStrikeParticlePrefab, info.point, info.normal);
    }
 
+   private static void CreateAt(string name, GameObject prefab, Vector3 position, Vector3 normal, bool flipFacing = false)
+   {
+      GameObject temp;
+      if (!RecycleManager.TryGetItem(name, out temp))
+      {
+         temp = Instantiate(prefab);
+         temp.name = name + "[Recyclable]";
+      }
+
+      temp.transform.position = position + (normal.normalized * offset);
+      temp.transform.forward = flipFacing ? -normal : normal;
+   }
+   
    private static void CreateAt(GameObject prefab, Vector3 position, Vector3 normal, bool flipFacing = false)
    {
-      var temp = Instantiate(prefab).transform;
-      temp.position = position + (normal.normalized * offset);
-      temp.forward = flipFacing ? -normal : normal;
+      GameObject temp = Instantiate(prefab);
+
+      temp.transform.position = position + (normal.normalized * offset);
+      temp.transform.forward = flipFacing ? -normal : normal;
    }
 }

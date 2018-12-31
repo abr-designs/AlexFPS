@@ -1,36 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 [CreateAssetMenu(fileName = "Gun", menuName = "Equipment/Gun", order = 1)]
 public class ScriptableGun : ScriptableObject
 {
    
-   [Header("General Information")]
+   [FoldoutGroup("General Information")]
    public float damage;
+   [FoldoutGroup("General Information")]
    public float range;
-   [Range(1f,10f)]
+   [Range(1f,10f)][FoldoutGroup("General Information")]
    public float accuracy;
+   [FoldoutGroup("General Information")]
    public AnimationCurve damageDropoff = new AnimationCurve();
+   [FoldoutGroup("General Information")]
+   public bool repeatable;
 
-   [Header("Reload Information")] 
+   [FoldoutGroup("Reload Information")] 
    public int ammoID;
+   [FoldoutGroup("Reload Information")] 
    public float fireCooldown;
 
+   [FoldoutGroup("Reload Information")] 
    public float muzzleFlashTime = 0.1f;
    //TODO Need to think if i even want reloading in the game
    //public float reloadTime;
    //public int magazineSize;
 
-   [Header("Visuals")] 
+   [FoldoutGroup("Visuals")] 
    public GameObject gunPrefab;
 
+   [FoldoutGroup("Visuals")]
    public GameObject muzzleFlashPrefab;
    //public GameObject bulletHolePrefab;
 
-   [Header("Local Transform Information")]
+   [FoldoutGroup("Local Transform Information")]
    public Vector3 initialPositionOffset;
+   [FoldoutGroup("Local Transform Information")]
    public Vector3 initialRotationOffset;
+   [FoldoutGroup("Local Transform Information")]
    public Vector3 localMuzzleOffset;
 
    

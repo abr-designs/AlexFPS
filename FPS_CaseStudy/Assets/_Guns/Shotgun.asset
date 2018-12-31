@@ -39,14 +39,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  repeatable: 0
   ammoID: 0
   fireCooldown: 0.7
   muzzleFlashTime: 0.1
   gunPrefab: {fileID: 6193054875271213801, guid: 82a5d50380ff1b24da0e03459f055a46,
     type: 3}
   muzzleFlashPrefab: {fileID: 100002, guid: acade480ec18aed4d95a5abc17649351, type: 3}
-  bulletHolePrefab: {fileID: 5994855030261012741, guid: 22de0b35faa67484db60ed7aa2473b77,
-    type: 3}
   initialPositionOffset: {x: 0, y: -0.287, z: 0.234}
   initialRotationOffset: {x: 270, y: 0, z: 180}
   localMuzzleOffset: {x: 0, y: 0.6, z: 0}

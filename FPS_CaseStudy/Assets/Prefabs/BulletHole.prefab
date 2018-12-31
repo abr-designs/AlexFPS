@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1289203240634562638}
+  - component: {fileID: 9200382246434868684}
   - component: {fileID: 7256453893760598261}
   - component: {fileID: 1348862845467205439}
   - component: {fileID: 3657834294089350839}
@@ -33,6 +34,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9200382246434868684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5994855030261012741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6cb37a27004803408d22cda3ce57dbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 10
+  name: BulletHole
 --- !u!114 &7256453893760598261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7073bb72bac549a4b9910f89628d7234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeTime: 10
 --- !u!33 &1348862845467205439
 MeshFilter:
   m_ObjectHideFlags: 0
