@@ -4,19 +4,8 @@
     <list default="true" id="2ad4f489-7502-439b-b479-5af8916bddd4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS_CaseStudy/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS_CaseStudy/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FPS_CaseStudy/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FPS_CaseStudy/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/Editor/JetBrains/JetBrains.Rider.Unity.Editor.Plugin.Repacked.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/BulletHole.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/BulletHole.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/ProBuilder Data/ProBuilderPreferences.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ProBuilder Data/ProBuilderPreferences.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Prototyping.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Prototyping.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Equipment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Equipment.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Guns/ScriptableGun.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Guns/ScriptableGun.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Guns/Shotgun.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Guns/Shotgun.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Pickups/PickupSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Pickups/PickupSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController/FPSPlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController/FPSPlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Shootables/Shootable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Shootables/Shootable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utility/Recycling/RecycleManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utility/Recycling/RecycleManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utility/Recycling/TimedRecycle.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utility/Recycling/TimedRecycle.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,15 +15,62 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Pickups/WeaponPickup.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+            <state relative-caret-position="68">
+              <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
               <folding>
-                <marker date="1546220738920" expanded="false" signature="6:78" ph="..." />
-                <marker date="1546220738920" expanded="true" signature="118:491" ph="{...}" />
-                <marker date="1546220738920" expanded="true" signature="207:489" ph="{...}" />
+                <marker date="1546220826721" expanded="false" signature="6:78" ph="..." />
+                <marker date="1546220826721" expanded="true" signature="118:509" ph="{...}" />
+                <marker date="1546220826721" expanded="false" signature="225:507" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Triggerable/ElevatorTriggerable.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="82">
+              <caret line="7" column="4" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+              <folding>
+                <marker date="1546394635775" expanded="true" signature="6:121" ph="..." />
+                <marker date="1546394635775" expanded="true" signature="123:229" ph="/* FIXME Need to ensure that if the player is under the elevator, they aren't pushed below the level ... */" />
+                <marker date="1546394635775" expanded="true" signature="318:5829" ph="{...}" />
+                <marker date="1546394635775" expanded="true" signature="325:572" ph="/* ... */" />
+                <marker date="1546394635775" expanded="true" signature="889:1136" ph="/* ... */" />
+                <marker date="1546394635775" expanded="true" signature="1373:1620" ph="/* ... */" />
+                <marker date="1546394635775" expanded="true" signature="1863:2110" ph="/* ... */" />
+                <marker date="1546394635775" expanded="true" signature="2164:2411" ph="/* ... */" />
+                <marker date="1546394635775" expanded="true" signature="2506:2742" ph="{...}" />
+                <marker date="1546394635775" expanded="true" signature="2804:2965" ph="{...}" />
+                <marker date="1546394635775" expanded="true" signature="3025:3124" ph="{...}" />
+                <marker date="1546394635775" expanded="true" signature="3130:3377" ph="/* ... */" />
+                <marker date="1546394635775" expanded="true" signature="3499:4385" ph="{...}" />
+                <marker date="1546394635775" expanded="true" signature="3612:3880" ph="{...}" />
+                <marker date="1546394635775" expanded="true" signature="3999:4319" ph="{...}" />
+                <marker date="1546394635775" expanded="true" signature="4153:4245" ph="/* rigidbody.MovePosition(targetPosition); ... */" />
+                <marker date="1546394635775" expanded="true" signature="4395:4642" ph="/* ... */" />
+                <marker date="1546394635775" expanded="true" signature="4814:4956" ph="{...}" />
+                <marker date="1546394635775" expanded="true" signature="5089:5229" ph="{...}" />
+                <marker date="1546394635775" expanded="true" signature="5368:5510" ph="{...}" />
+                <marker date="1546394635775" expanded="true" signature="5543:5819" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Triggerable/TriggerableBase.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="12" column="58" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
+              <folding>
+                <marker date="1546393415117" expanded="false" signature="6:61" ph="..." />
+                <marker date="1546393415117" expanded="true" signature="155:982" ph="{...}" />
+                <marker date="1546393415117" expanded="true" signature="449:722" ph="{...}" />
+                <marker date="1546393415117" expanded="true" signature="775:885" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -43,7 +79,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Equipment.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
+            <state relative-caret-position="731">
               <caret line="89" column="79" selection-start-line="89" selection-start-column="79" selection-end-line="89" selection-end-column="79" />
               <folding>
                 <marker date="1546220714777" expanded="false" signature="6:107" ph="..." />
@@ -53,7 +89,7 @@
                 <marker date="1546220714777" expanded="true" signature="671:919" ph="{...}" />
                 <marker date="1546220714777" expanded="false" signature="996:1147" ph="{...}" />
                 <marker date="1546220714777" expanded="true" signature="1061:1127" ph="{...}" />
-                <marker date="1546220714777" expanded="true" signature="1193:1664" ph="{...}" />
+                <marker date="1546220714777" expanded="false" signature="1193:1664" ph="{...}" />
                 <marker date="1546220714777" expanded="true" signature="1231:1280" ph="{...}" />
                 <marker date="1546220714777" expanded="true" signature="1287:1502" ph="{...}" />
                 <marker date="1546220714777" expanded="true" signature="1505:1644" ph="/* TODO Check to see if its already equipped ... */" />
@@ -95,11 +131,13 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Guns/ScriptableGun.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Equipment.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/IUIUpdate.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Triggerable/ElevatorTriggerable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Killable/KillableBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pickups/PickupBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utility/Recycling/TimedRecycleName.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Killable/PlayerKillable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pickups/PickupSpawner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Triggerable/TriggerableBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Pickups/PickupArmour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utility/Recycling/RecycleManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Input Settings/FPSControls.cs" root0="FORCE_HIGHLIGHTING" />
@@ -139,6 +177,8 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/PickupSpawner.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Equipment.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Pickups/WeaponPickup.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Triggerable/TriggerableBase.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Triggerable/ElevatorTriggerable.cs" />
       </list>
     </option>
   </component>
@@ -147,7 +187,7 @@
       <facet id="riderModule/invalid/Default Android Facet" />
     </ignored-facets>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1440" />
@@ -159,10 +199,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AssemblyExplorer" />
+      <pane id="FileSystemExplorer" />
       <pane id="SolutionExplorer">
         <option name="show-all-files" value="false" />
       </pane>
+      <pane id="AssemblyExplorer" />
       <pane id="UnityExplorer">
         <subPane>
           <expand>
@@ -205,7 +246,6 @@
         </subPane>
         <option name="show-hidden-items" value="false" />
       </pane>
-      <pane id="FileSystemExplorer" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -213,7 +253,7 @@
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="do_not_show_solution_notification" value="true" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
+    <property name="settings.editor.selected.configurable" value="preferences.toDoOptions" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -260,12 +300,13 @@
       <workItem from="1545755445929" duration="6580000" />
       <workItem from="1545836305556" duration="6937000" />
       <workItem from="1546215101048" duration="3455000" />
-      <workItem from="1546218979733" duration="1761000" />
+      <workItem from="1546218979733" duration="2446000" />
+      <workItem from="1546385977370" duration="6009000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49237000" />
+    <option name="totallyTimeSpent" value="55931000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -277,10 +318,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.0826226" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0826226" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Captures" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -630,7 +671,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Equipment.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
+        <state relative-caret-position="731">
           <caret line="89" column="79" selection-start-line="89" selection-start-column="79" selection-end-line="89" selection-end-column="79" />
           <folding>
             <marker date="1546220714777" expanded="false" signature="6:107" ph="..." />
@@ -640,7 +681,7 @@
             <marker date="1546220714777" expanded="true" signature="671:919" ph="{...}" />
             <marker date="1546220714777" expanded="false" signature="996:1147" ph="{...}" />
             <marker date="1546220714777" expanded="true" signature="1061:1127" ph="{...}" />
-            <marker date="1546220714777" expanded="true" signature="1193:1664" ph="{...}" />
+            <marker date="1546220714777" expanded="false" signature="1193:1664" ph="{...}" />
             <marker date="1546220714777" expanded="true" signature="1231:1280" ph="{...}" />
             <marker date="1546220714777" expanded="true" signature="1287:1502" ph="{...}" />
             <marker date="1546220714777" expanded="true" signature="1505:1644" ph="/* TODO Check to see if its already equipped ... */" />
@@ -667,12 +708,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Pickups/WeaponPickup.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="16" column="10" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+        <state relative-caret-position="68">
+          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
           <folding>
-            <marker date="1546220738920" expanded="false" signature="6:78" ph="..." />
-            <marker date="1546220738920" expanded="true" signature="118:491" ph="{...}" />
-            <marker date="1546220738920" expanded="true" signature="207:489" ph="{...}" />
+            <marker date="1546220826721" expanded="false" signature="6:78" ph="..." />
+            <marker date="1546220826721" expanded="true" signature="118:509" ph="{...}" />
+            <marker date="1546220826721" expanded="false" signature="225:507" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Triggerable/TriggerableBase.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="12" column="58" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
+          <folding>
+            <marker date="1546393415117" expanded="false" signature="6:61" ph="..." />
+            <marker date="1546393415117" expanded="true" signature="155:982" ph="{...}" />
+            <marker date="1546393415117" expanded="true" signature="449:722" ph="{...}" />
+            <marker date="1546393415117" expanded="true" signature="775:885" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Triggerable/ElevatorTriggerable.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="7" column="4" lean-forward="true" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+          <folding>
+            <marker date="1546394635775" expanded="true" signature="6:121" ph="..." />
+            <marker date="1546394635775" expanded="true" signature="123:229" ph="/* FIXME Need to ensure that if the player is under the elevator, they aren't pushed below the level ... */" />
+            <marker date="1546394635775" expanded="true" signature="318:5829" ph="{...}" />
+            <marker date="1546394635775" expanded="true" signature="325:572" ph="/* ... */" />
+            <marker date="1546394635775" expanded="true" signature="889:1136" ph="/* ... */" />
+            <marker date="1546394635775" expanded="true" signature="1373:1620" ph="/* ... */" />
+            <marker date="1546394635775" expanded="true" signature="1863:2110" ph="/* ... */" />
+            <marker date="1546394635775" expanded="true" signature="2164:2411" ph="/* ... */" />
+            <marker date="1546394635775" expanded="true" signature="2506:2742" ph="{...}" />
+            <marker date="1546394635775" expanded="true" signature="2804:2965" ph="{...}" />
+            <marker date="1546394635775" expanded="true" signature="3025:3124" ph="{...}" />
+            <marker date="1546394635775" expanded="true" signature="3130:3377" ph="/* ... */" />
+            <marker date="1546394635775" expanded="true" signature="3499:4385" ph="{...}" />
+            <marker date="1546394635775" expanded="true" signature="3612:3880" ph="{...}" />
+            <marker date="1546394635775" expanded="true" signature="3999:4319" ph="{...}" />
+            <marker date="1546394635775" expanded="true" signature="4153:4245" ph="/* rigidbody.MovePosition(targetPosition); ... */" />
+            <marker date="1546394635775" expanded="true" signature="4395:4642" ph="/* ... */" />
+            <marker date="1546394635775" expanded="true" signature="4814:4956" ph="{...}" />
+            <marker date="1546394635775" expanded="true" signature="5089:5229" ph="{...}" />
+            <marker date="1546394635775" expanded="true" signature="5368:5510" ph="{...}" />
+            <marker date="1546394635775" expanded="true" signature="5543:5819" ph="{...}" />
           </folding>
         </state>
       </provider>

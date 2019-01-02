@@ -248,6 +248,10 @@
             <e p="Shootable.cs" t="Include" />
             <e p="ShootableMaterialScriptable.cs" t="Include" />
           </e>
+          <e p="Triggerable" t="Include">
+            <e p="ElevatorTriggerable.cs" t="Include" />
+            <e p="TriggerableBase.cs" t="Include" />
+          </e>
           <e p="UI" t="Include">
             <e p="IUIUpdate.cs" t="Include" />
             <e p="UIManager.cs" t="Include" />
