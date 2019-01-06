@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\AlexVRH\.Rider2018.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\AlexVRH\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_FPS_CaseStudy.-942416814.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Alex\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Alex\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_FPS_CaseStudy.-942416814.00" t="ExcludeRecursive" />
     <e p="D:\Repos\AlexFPS\FPS_CaseStudy" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
@@ -224,6 +224,11 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="AI" t="Include">
+            <e p="EnemyAI.cs" t="Include" />
+            <e p="StateMachineBase.cs" t="Include" />
+            <e p="View.cs" t="Include" />
+          </e>
           <e p="Equipment.cs" t="Include" />
           <e p="Guns" t="Include">
             <e p="ScriptableGun.cs" t="Include" />
@@ -325,6 +330,9 @@
                 <e p="CFX_SpawnSystem.cs" t="Include" />
               </e>
             </e>
+          </e>
+          <e p="ToonSoldiers_demo" t="Include">
+            <e p="ToonSoldiers_demo.txt" t="Include" />
           </e>
         </e>
         <e p="TextMesh Pro" t="Include">

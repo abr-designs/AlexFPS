@@ -58,7 +58,7 @@ public class ScriptableGun : ScriptableObject
          
          //I want to make sure i do negative health (Damage)
          if(killable)
-            killable.ChangeHealth(-damage);
+            killable.ChangeHealth(-damage, position);
 
          //TODO Need some sort of default material to fallback onto
          var temp = hit.transform.GetComponent<Shootable>();

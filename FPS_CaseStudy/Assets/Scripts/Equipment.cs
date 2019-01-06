@@ -105,7 +105,7 @@ public class Equipment : MonoBehaviour, IUIUpdate
 		{
 			if (!CanFire)
 			{
-				Debug.LogError("Cant Fire");
+				//Debug.LogError("Cant Fire");
 				return;
 			}
 

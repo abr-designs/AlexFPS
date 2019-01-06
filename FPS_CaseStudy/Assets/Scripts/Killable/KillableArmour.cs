@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
 public class KillableArmour : KillableBase
 {
+	
 	[SerializeField, ProgressBar(0, 100, 0.5f, 0.5f, 0f)]
 	protected float armour = 0;
 
