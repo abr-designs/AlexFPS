@@ -13,7 +13,8 @@ public abstract class StateMachineBase : MonoBehaviour
     public enum STATE
     {
         IDLE,
-        RUN,
+        WANDER,
+        PURSUE,
         ATTACK,
         DEAD
     }
@@ -27,10 +28,12 @@ public abstract class StateMachineBase : MonoBehaviour
     [SerializeField, FoldoutGroup("Idle Properties"), SuffixLabel("s", true)]
     protected float idleWaitTime;
     
-    [SerializeField, FoldoutGroup("Running Properties"), SuffixLabel("m/s", true)]
+    [SerializeField, FoldoutGroup("Wander Properties"), SuffixLabel("m/s", true)]
     protected float speed;
-    [SerializeField, FoldoutGroup("Running Properties")]
+    [SerializeField, FoldoutGroup("Wander Properties")]
     protected Vector3 worldTarget;
+
+    protected Vector3 lastTargetPosition;
 
     protected float mTimer = 0f;
     
@@ -69,8 +72,11 @@ public abstract class StateMachineBase : MonoBehaviour
             case STATE.IDLE:
                 IdleState();
                 break;
-            case STATE.RUN:
-                RunState();
+            case STATE.WANDER:
+                WanderState();
+                break;
+            case STATE.PURSUE:
+                PursueState();
                 break;
             case STATE.ATTACK:
                 AttackState();
@@ -86,7 +92,8 @@ public abstract class StateMachineBase : MonoBehaviour
     #region States
 
     protected abstract void IdleState();
-    protected abstract void RunState();
+    protected abstract void WanderState();
+    protected abstract void PursueState();
     protected abstract void AttackState();
     protected abstract void DeadState();
     

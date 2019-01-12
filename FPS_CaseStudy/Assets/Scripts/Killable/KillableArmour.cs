@@ -42,9 +42,9 @@ public class KillableArmour : KillableBase
 		base.ChangeHealth(amount);
 	}
 
-	protected override void UpdateUI()
+	public override void Reset()
 	{
-		base.UpdateUI();
-		//TODO Update the Armour UI
+		base.Reset();
+		armour = 0f;
 	}
 }

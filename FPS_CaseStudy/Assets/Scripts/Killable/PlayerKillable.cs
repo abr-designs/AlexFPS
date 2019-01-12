@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class PlayerKillable : KillableArmour, IUIUpdate
 {
-	private void Start()
+	
+	
+	
+	protected override void Start()
 	{
+		base.Start();
+		
 		UpdateUI();
 	}
 
@@ -25,5 +30,16 @@ public class PlayerKillable : KillableArmour, IUIUpdate
 	{
 		UIManager.Instance.SetArmour(armour);
 		UIManager.Instance.SetHealth(health);
+	}
+
+	public override void Kill()
+	{
+		RespawnManager.Instance.Respawn(this, startPosition, startRotation, true);
+	}
+
+	public override void Reset()
+	{
+		base.Reset();
+		UpdateUI();
 	}
 }

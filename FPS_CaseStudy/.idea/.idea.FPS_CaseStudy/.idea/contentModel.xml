@@ -225,6 +225,7 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="AI" t="Include">
+            <e p="AnimationListeners.cs" t="Include" />
             <e p="EnemyAI.cs" t="Include" />
             <e p="StateMachineBase.cs" t="Include" />
             <e p="View.cs" t="Include" />
@@ -249,6 +250,7 @@
             <e p="FPSPlayerController.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
           </e>
+          <e p="RespawnManager.cs" t="Include" />
           <e p="Shootables" t="Include">
             <e p="Shootable.cs" t="Include" />
             <e p="ShootableMaterialScriptable.cs" t="Include" />

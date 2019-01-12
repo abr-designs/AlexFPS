@@ -1,17 +1,25 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider)), RequireComponent(typeof(View)), RequireComponent(typeof(KillableBase))]
-public class EnemyAI : StateMachineBase
+public class EnemyAI : StateMachineBase, IShootAnimation
 {
     ////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
 
+    [SerializeField, FoldoutGroup("Attack Properties"), Required]
+    private ScriptableGun equippedGun;
+
+    [SerializeField, FoldoutGroup("Attack Properties"), Required]
+    protected Transform muzzlePointTransform;
+    
+    
     private List<Transform> activeTargets;
     
     ////////////////////////////////////////////////////////////////////////////////////
@@ -60,9 +68,13 @@ public class EnemyAI : StateMachineBase
         {
             case STATE.IDLE:
                 break;
-            case STATE.RUN:
+            case STATE.WANDER:
                 //Pick a point between current location and max view distance
                 navMeshAgent.SetDestination((Vector3?) parameters ?? RandomNavmeshLocation(view.MaxViewDistance));
+                break;
+            case STATE.PURSUE:
+                //Pick a point between current location and max view distance
+                navMeshAgent.SetDestination(lastTargetPosition);
                 break;
             case STATE.ATTACK:
                 navMeshAgent.SetDestination(transform.position);
@@ -87,7 +99,8 @@ public class EnemyAI : StateMachineBase
             case STATE.IDLE:
                 animator.SetBool(parameterIds[0], true);
                 break;
-            case STATE.RUN:
+            case STATE.PURSUE:
+            case STATE.WANDER:
                 animator.SetBool(parameterIds[1], true);
                 break;
             case STATE.ATTACK:
@@ -96,7 +109,7 @@ public class EnemyAI : StateMachineBase
             case STATE.DEAD:
                 break;
             default:
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(currentState.ToString());
         }
     }
 
@@ -116,7 +129,7 @@ public class EnemyAI : StateMachineBase
         if (mTimer >= idleWaitTime)
         {
             //TODO Need to move to a new run state
-            InitState(STATE.RUN);
+            InitState(STATE.WANDER);
         }
         else
         {
@@ -124,7 +137,7 @@ public class EnemyAI : StateMachineBase
         }
     }
 
-    protected override void RunState()
+    protected override void WanderState()
     {
         if (activeTargets != null && activeTargets.Count > 0)
         {
@@ -139,19 +152,32 @@ public class EnemyAI : StateMachineBase
         }
     }
 
+    protected override void PursueState()
+    {
+        if (navMeshAgent.remainingDistance < 0.2f)
+        {
+            InitState(STATE.IDLE);
+            return;
+        }
+    }
+
     protected override void AttackState()
     {
+        //TODO I want to implement some sort of chasing of the player here, so that the AI is chasing the player
+        //Its important to not have the AI chase the player, so that he wouldn't be able to get away
+        
         if (activeTargets == null || activeTargets.Count == 0)
         {
-            InitState(STATE.RUN);
+            InitState(STATE.PURSUE);
             return;
         }
 
-        Vector3 lookAtTarget = activeTargets[0].position;
-        lookAtTarget.y = transform.position.y;
+        Vector3 lookAtTarget = lastTargetPosition = activeTargets[0].position;
         
+        var position = transform.position;
+        lookAtTarget.y = position.y;
 
-        transform.forward = (lookAtTarget - transform.position).normalized;
+        transform.forward = (lookAtTarget - position).normalized;
 
         //TODO Need to chase player, without getting too close
         //TODO Shoot at player
@@ -169,7 +195,7 @@ public class EnemyAI : StateMachineBase
         if (currentState == STATE.ATTACK)
             return;
 
-        InitState(STATE.RUN, GetNavMeshPointFromPosition(fromPosition));
+        InitState(STATE.WANDER, GetNavMeshPointFromPosition(fromPosition));
     }
     
     //Thanks to http://answers.unity.com/answers/1426690/view.html
@@ -198,4 +224,14 @@ public class EnemyAI : StateMachineBase
     {
         GetComponent<KillableBase>().onHitCallback -= Hit;
     }
+
+    #region Animation Listeners
+    
+    public void AnimationShoot(int amount)
+    {
+        equippedGun.Fire(muzzlePointTransform.position, lastTargetPosition - muzzlePointTransform.position);
+        Debug.DrawRay(muzzlePointTransform.position, lastTargetPosition - muzzlePointTransform.position, Color.red, 2f);
+    }
+    
+    #endregion //Animation Listeners
 }
