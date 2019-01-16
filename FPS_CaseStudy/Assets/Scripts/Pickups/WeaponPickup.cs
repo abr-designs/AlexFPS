@@ -6,7 +6,13 @@ public class WeaponPickup : PickupBase
 {
 	[SerializeField]
 	private ScriptableGun weapon;
-	
+
+	public void Init(string tag, ScriptableGun gun)
+	{
+		base.Init(tag);
+		weapon = gun;
+	}
+
 	protected override void OnPickedUp(GameObject other)
 	{
 		Equipment temp = other.GetComponent<Equipment>();

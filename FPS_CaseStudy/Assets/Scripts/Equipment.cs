@@ -98,7 +98,7 @@ public class Equipment : MonoBehaviour, IUIUpdate
 		//Need a coroutine to actually only play the animation for X amount of time
 	}
 
-	public void Fire(Vector3 direction)
+	public void Fire(Vector3 position, Vector3 direction)
 	{
 		//We need to check for all of the legality of shooting before we try to actually fire
 		if (currentlyEquipped)
@@ -115,7 +115,7 @@ public class Equipment : MonoBehaviour, IUIUpdate
 				return;
 			}
             
-			currentlyEquipped.Fire(MuzzlePosition, direction.normalized);
+			currentlyEquipped.Fire(position, direction.normalized);
 			SpendAmmo();
 			lastFireTime = Time.time;
 			UpdateUI();
@@ -154,7 +154,7 @@ public class Equipment : MonoBehaviour, IUIUpdate
 	{
 		flashing = true;
 		SetParticles(true);
-		
+
 		yield return new WaitForSeconds(time);
 
 		SetParticles(false);

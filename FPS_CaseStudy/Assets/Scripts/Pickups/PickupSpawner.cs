@@ -6,26 +6,26 @@ using UnityEngine;
 public class PickupSpawner : MonoBehaviour
 {
     [SerializeField, Range(1f,30f)]
-    private float respawnTime;
+    protected float respawnTime;
 
     private float despawnTimeCode;
 
     [SerializeField]
-    private Vector3 spawnOffset;
+    protected Vector3 spawnOffset;
     [SerializeField]
-    private Vector3 spawnRotationOffset;
+    protected Vector3 spawnRotationOffset;
 
     [SerializeField,Required]
-    private GameObject pickupPrefab;
+    protected GameObject pickupPrefab;
 
-    private Transform pickupTransform;
+    protected Transform pickupTransform;
 
     
-    private new Transform transform;
+    protected new Transform transform;
     
     
     // Start is called before the first frame update
-    private void Start()
+    protected virtual void Start()
     {
         gameObject.name += "[" + pickupPrefab.name + "]";
         
@@ -35,15 +35,18 @@ public class PickupSpawner : MonoBehaviour
     }
 
 
-    private void SpawnPickup()
+    protected virtual void SpawnPickup()
     {
         pickupTransform = Instantiate(pickupPrefab).transform;
+
+        pickupTransform.GetComponent<Collider>().enabled = true;
+        pickupTransform.GetComponent<Collider>().isTrigger = true;
 
         pickupTransform.position = transform.TransformPoint(spawnOffset);
         pickupTransform.rotation = transform.rotation * Quaternion.Euler(spawnRotationOffset);
     }
 
-    private void LateUpdate()
+    protected void LateUpdate()
     {
         if (!transform)
             return;
@@ -63,7 +66,7 @@ public class PickupSpawner : MonoBehaviour
     
     #if UNITY_EDITOR
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         if (transform == null)
             transform = gameObject.transform;

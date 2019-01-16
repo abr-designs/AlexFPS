@@ -24,6 +24,11 @@ public class PickupBase : MonoBehaviour
             OnPickedUp(other.gameObject);
     }
 
+    public virtual void Init(string tag)
+    {
+        
+    }
+
     protected virtual void OnPickedUp(GameObject other)
     {
         Debug.LogFormat(gameObject, "{0} picked up {1}", other.name, this.name);
