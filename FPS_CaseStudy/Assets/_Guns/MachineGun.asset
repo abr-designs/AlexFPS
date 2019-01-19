@@ -40,6 +40,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   repeatable: 1
+  recoilMin: {x: -2, y: -1, z: 0}
+  recoilMax: {x: 2, y: -5, z: 0}
   ammoID: 1
   fireCooldown: 0.15
   muzzleFlashTime: 0.15
@@ -47,7 +49,6 @@ MonoBehaviour:
     type: 3}
   muzzleFlashPrefab: {fileID: 100002, guid: acade480ec18aed4d95a5abc17649351, type: 3}
   shootSound: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
-  shootAudioSource: {fileID: 0}
   initialPositionOffset: {x: -0.15, y: -0.287, z: 0.77}
   initialRotationOffset: {x: 0, y: 0, z: 0}
   localMuzzleOffset: {x: -0.02, y: -0.01, z: 0.65}

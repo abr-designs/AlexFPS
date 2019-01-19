@@ -9,14 +9,14 @@ public class TimedRecycle : MonoBehaviour, IRecyclable
 
     protected bool active = false;
     // Start is called before the first frame update
-    protected void OnEnable()
+    protected virtual void OnEnable()
     {
         timeEnabled = Time.time;
         active = true;
     }
 
     // Update is called once per frame
-    protected void Update()
+    protected virtual void Update()
     {
         if (active == false)
             return;
@@ -33,6 +33,6 @@ public class TimedRecycle : MonoBehaviour, IRecyclable
 
     public virtual void OnRecycled()
     {
-        Debug.Log("Recycled", gameObject);
+        Debug.Log("Recycled " + gameObject.name);
     }
 }

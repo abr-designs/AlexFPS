@@ -235,6 +235,7 @@
           </e>
           <e p="Equipment.cs" t="Include" />
           <e p="Guns" t="Include">
+            <e p="BulletTrail.cs" t="Include" />
             <e p="ScriptableGun.cs" t="Include" />
           </e>
           <e p="Killable" t="Include">

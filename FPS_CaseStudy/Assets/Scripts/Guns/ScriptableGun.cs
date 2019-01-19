@@ -44,9 +44,6 @@ public class ScriptableGun : ScriptableObject
    [FoldoutGroup("Audio"), Required] 
    public AudioClip shootSound;
 
-   [FoldoutGroup("Audio"), ReadOnly]
-   public AudioSource shootAudioSource;
-
    [FoldoutGroup("Local Transform Information")]
    public Vector3 initialPositionOffset;
    [FoldoutGroup("Local Transform Information")]

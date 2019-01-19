@@ -14,11 +14,17 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
     ////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
 
+    [SerializeField, FoldoutGroup("Attack Properties"), Range(2f,0f)]
+    private float accuracy;
+    
     [SerializeField, FoldoutGroup("Attack Properties"), Required]
     private ScriptableGun equippedGun;
 
     [SerializeField, FoldoutGroup("Attack Properties"), Required]
     protected Transform muzzlePointTransform;
+    
+    [SerializeField, FoldoutGroup("Attack Properties"), Required]
+    protected GameObject fireLinePrefab;
 
     
     [FormerlySerializedAs("muzzleAudioSource")] [SerializeField, FoldoutGroup("Audio Properties")]
@@ -245,8 +251,23 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
     
     public void AnimationShoot(int amount)
     {
-        equippedGun.Fire(muzzlePointTransform.position, lastTargetPosition - muzzlePointTransform.position, audioSource);
-        Debug.DrawRay(muzzlePointTransform.position, lastTargetPosition - muzzlePointTransform.position, Color.red, 2f);
+        Vector3 fireDirection = lastTargetPosition - muzzlePointTransform.position;
+        fireDirection += transform.right * Random.Range(-accuracy, accuracy);
+        fireDirection += transform.up * Random.Range(-accuracy, accuracy);
+        
+        equippedGun.Fire(muzzlePointTransform.position, fireDirection, audioSource);
+        Debug.DrawRay(muzzlePointTransform.position, fireDirection, Color.red, 2f);
+
+        GameObject trail;
+
+        //Creates a bullet train to add better visuals for where the AI is shooting
+        if (!RecycleManager.TryGetItem("BulletTrail", out trail))
+        {
+            trail = Instantiate(fireLinePrefab);
+            
+        }
+        
+        trail.GetComponent<BulletTrail>().Init(muzzlePointTransform.position,fireDirection);
     }
     
     public void WalkAnimation()

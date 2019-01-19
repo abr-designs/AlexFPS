@@ -37,10 +37,10 @@ public abstract class StateMachineBase : MonoBehaviour
 
     protected float mTimer = 0f;
     
-    [SerializeField, Required]
+    [SerializeField, FoldoutGroup("Animation Properties"), Required]
     protected Animator animator;
     
-    [SerializeField, Required]
+    [SerializeField, FoldoutGroup("Navigation Properties"), Required]
     protected NavMeshAgent navMeshAgent;
 
     protected string startingName;
