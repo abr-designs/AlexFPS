@@ -46,6 +46,8 @@ MonoBehaviour:
   gunPrefab: {fileID: 6625930993364236944, guid: 601e85bd42eaf3f46826cf535d9637ef,
     type: 3}
   muzzleFlashPrefab: {fileID: 100002, guid: acade480ec18aed4d95a5abc17649351, type: 3}
+  shootSound: {fileID: 8300000, guid: 1b766da7cc2d648aa84e36cb5fe8abcb, type: 3}
+  shootAudioSource: {fileID: 0}
   initialPositionOffset: {x: 0.24, y: -0.35, z: 0.8}
   initialRotationOffset: {x: 0, y: 0, z: 0}
   localMuzzleOffset: {x: 0, y: 0.1, z: 0.24}

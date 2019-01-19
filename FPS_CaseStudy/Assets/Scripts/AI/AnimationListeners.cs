@@ -6,3 +6,8 @@ public interface IShootAnimation
 {
 	void AnimationShoot(int amount);
 }
+
+public interface IWalkAnimation
+{
+	void WalkAnimation();
+}

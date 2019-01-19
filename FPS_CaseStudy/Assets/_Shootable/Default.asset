@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97af99118eac3fa4f94e9bd14947cad0, type: 3}
+  m_Name: Default
+  m_EditorClassIdentifier: 
+  createBulletHole: 1
+  bulletHolePrefab: {fileID: 5994855030261012741, guid: 22de0b35faa67484db60ed7aa2473b77,
+    type: 3}
+  bulletStrikeParticlePrefab: {fileID: 100002, guid: e74af37e539075d428c1f7bd8cdb781d,
+    type: 3}
+  volume: 1
+  impactAudioClips:
+  - {fileID: 8300000, guid: c2f6d885c3f9d5d4ba6fe93c56f31596, type: 3}
+  - {fileID: 8300000, guid: 91e5f8c705255bf4d839dfd6501b371e, type: 3}
+  - {fileID: 8300000, guid: c1504b69352c55f4abe9273e3ce16d6b, type: 3}
+  - {fileID: 8300000, guid: ed10fe829ef23814a8bdde6f3f0a4001, type: 3}
+  - {fileID: 8300000, guid: 790f082d5e1f06948a94b1918d10f345, type: 3}
+  - {fileID: 8300000, guid: 59208527867f6834dbefbcb2ac5b688f, type: 3}
+  - {fileID: 8300000, guid: a65b757189c792b4abca884e6f5fc902, type: 3}
+  - {fileID: 8300000, guid: c574a25d07236144f8b55b97d12cd26b, type: 3}

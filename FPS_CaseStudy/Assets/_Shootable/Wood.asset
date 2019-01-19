@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97af99118eac3fa4f94e9bd14947cad0, type: 3}
+  m_Name: Wood
+  m_EditorClassIdentifier: 
+  createBulletHole: 1
+  bulletHolePrefab: {fileID: 5994855030261012741, guid: 22de0b35faa67484db60ed7aa2473b77,
+    type: 3}
+  bulletStrikeParticlePrefab: {fileID: 100002, guid: 855f647f81ad9774a905ff23fdc26618,
+    type: 3}
+  volume: 1
+  impactAudioClips:
+  - {fileID: 8300000, guid: f60a6e682f6356d4683567fed24105e4, type: 3}
+  - {fileID: 8300000, guid: cd931b714af19c14891a65c2ee7b7ac7, type: 3}
+  - {fileID: 8300000, guid: b6b1a5f83071b6a43b52c17c9d5c3640, type: 3}
+  - {fileID: 8300000, guid: e69fc774c48fcce4e8c1fbe78119b1c7, type: 3}
+  - {fileID: 8300000, guid: a620493bb3d2cc841bc6199305f45f7e, type: 3}
+  - {fileID: 8300000, guid: e27fb75e3ab30ec4eb281b7d2afc0c7d, type: 3}
+  - {fileID: 8300000, guid: a9780f98c8d021e4c9b80fa6116074d9, type: 3}
+  - {fileID: 8300000, guid: d4938ba47494557469167b3aabfd1e9a, type: 3}

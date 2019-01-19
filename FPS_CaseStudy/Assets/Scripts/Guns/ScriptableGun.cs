@@ -18,6 +18,11 @@ public class ScriptableGun : ScriptableObject
    [FoldoutGroup("General Information")]
    public bool repeatable;
 
+   [FoldoutGroup("General Information")] 
+   public Vector3 recoilMin;
+   [FoldoutGroup("General Information")] 
+   public Vector3 recoilMax;
+
    [FoldoutGroup("Reload Information")] 
    public int ammoID;
    [FoldoutGroup("Reload Information")] 
@@ -36,6 +41,12 @@ public class ScriptableGun : ScriptableObject
    public GameObject muzzleFlashPrefab;
    //public GameObject bulletHolePrefab;
 
+   [FoldoutGroup("Audio"), Required] 
+   public AudioClip shootSound;
+
+   [FoldoutGroup("Audio"), ReadOnly]
+   public AudioSource shootAudioSource;
+
    [FoldoutGroup("Local Transform Information")]
    public Vector3 initialPositionOffset;
    [FoldoutGroup("Local Transform Information")]
@@ -44,7 +55,7 @@ public class ScriptableGun : ScriptableObject
    public Vector3 localMuzzleOffset;
 
    
-   public void Fire(Vector3 position, Vector3 direction)
+   public void Fire(Vector3 position, Vector3 direction, AudioSource audioSource)
    {
      
       RaycastHit hit;
@@ -71,7 +82,17 @@ public class ScriptableGun : ScriptableObject
       }
       else
         Debug.DrawRay(position, direction * range, Color.red, 3f);
+      
+      audioSource.PlayOneShot(shootSound);
 
+   }
+
+   public Vector3 GetRecoil()
+   {
+      return new Vector3(
+         Random.Range(recoilMin.x, recoilMax.x),
+         Random.Range(recoilMin.y, recoilMax.y),
+         Random.Range(recoilMin.z, recoilMax.z));
    }
 
 

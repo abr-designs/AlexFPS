@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider)), RequireComponent(typeof(View)), RequireComponent(typeof(KillableBase))]
-public class EnemyAI : StateMachineBase, IShootAnimation
+[RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider)), RequireComponent(typeof(View)), RequireComponent(typeof(KillableBase)), RequireComponent(typeof(AudioSource))]
+public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
 {
     ////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
@@ -18,6 +19,13 @@ public class EnemyAI : StateMachineBase, IShootAnimation
 
     [SerializeField, FoldoutGroup("Attack Properties"), Required]
     protected Transform muzzlePointTransform;
+
+    
+    [FormerlySerializedAs("muzzleAudioSource")] [SerializeField, FoldoutGroup("Audio Properties")]
+    protected AudioSource audioSource;
+
+    [SerializeField, FoldoutGroup("Audio Properties"), Required]
+    protected WalkSoundScriptable walkingSounds;
     
     
     private List<Transform> activeTargets;
@@ -49,6 +57,14 @@ public class EnemyAI : StateMachineBase, IShootAnimation
         }
 
         GetComponent<KillableBase>().onHitCallback += Hit;
+
+        //We assign the audio source, and then make sure that its 3D
+        audioSource = gameObject.GetComponent<AudioSource>();
+        //audioSource.spatialBlend = 1f;
+        //audioSource.rolloffMode = AudioRolloffMode.Logarithmic;
+        //audioSource.minDistance = 3f;
+        //audioSource.maxDistance = 10f;
+        //audioSource.spatialize = true;
         
         InitState(STATE.IDLE);
     }
@@ -229,9 +245,16 @@ public class EnemyAI : StateMachineBase, IShootAnimation
     
     public void AnimationShoot(int amount)
     {
-        equippedGun.Fire(muzzlePointTransform.position, lastTargetPosition - muzzlePointTransform.position);
+        equippedGun.Fire(muzzlePointTransform.position, lastTargetPosition - muzzlePointTransform.position, audioSource);
         Debug.DrawRay(muzzlePointTransform.position, lastTargetPosition - muzzlePointTransform.position, Color.red, 2f);
     }
     
+    public void WalkAnimation()
+    {
+        walkingSounds.PlayWalkingAudio(audioSource);
+    }
+    
     #endregion //Animation Listeners
+
+    
 }

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEngine.Serialization;
+using UnityEditor.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider))]
 public class FPSPlayerController : PlayerController
@@ -22,33 +21,33 @@ public class FPSPlayerController : PlayerController
     /////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////// 
 
-    [SerializeField, ReadOnly, FoldoutGroup("Information")]
+    [SerializeField, Sirenix.OdinInspector.ReadOnly, FoldoutGroup("Information")]
     private bool canMove = true;
 
-    [SerializeField, ReadOnly, FoldoutGroup("Information")]
+    [SerializeField, Sirenix.OdinInspector.ReadOnly, FoldoutGroup("Information")]
     private bool isRunning = false;
-    [SerializeField, ReadOnly, FoldoutGroup("Information")]
+    [SerializeField, Sirenix.OdinInspector.ReadOnly, FoldoutGroup("Information")]
     private bool isCrouching = false;
 
-    [SerializeField, ReadOnly, FoldoutGroup("Information")]
+    [SerializeField, Sirenix.OdinInspector.ReadOnly, FoldoutGroup("Information")]
     private bool onGround = true;
 
-    [SerializeField, ReadOnly, FoldoutGroup("Information")]
+    [SerializeField, Sirenix.OdinInspector.ReadOnly, FoldoutGroup("Information")]
     private bool ignoreGround = false;
 
-    [SerializeField, ReadOnly, FoldoutGroup("Information")]
+    [SerializeField, Sirenix.OdinInspector.ReadOnly, FoldoutGroup("Information")]
     private bool isJumping = false;
     
-    [SerializeField, ReadOnly, FoldoutGroup("Information")]
+    [SerializeField, Sirenix.OdinInspector.ReadOnly, FoldoutGroup("Information")]
     private bool isFiring = false;
 
     /////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
 
-    [SerializeField, ReadOnly, FoldoutGroup("Movement")]
+    [SerializeField, Sirenix.OdinInspector.ReadOnly, FoldoutGroup("Movement")]
     private Vector3 moveDelta;
-    [SerializeField, ReadOnly, FoldoutGroup("Movement")]
+    [SerializeField, Sirenix.OdinInspector.ReadOnly, FoldoutGroup("Movement")]
     private Vector3 fallDelta;
     
     [SerializeField, FoldoutGroup("Movement")]
@@ -59,7 +58,7 @@ public class FPSPlayerController : PlayerController
     
     [SerializeField, FoldoutGroup("Movement")]
     private float crouchSpeed = 2.5f;
-    [FormerlySerializedAs("crouchHeight")] [SerializeField, FoldoutGroup("Movement")]
+    [SerializeField, FoldoutGroup("Movement")]
     private float crouchHeightReduction = 0.6f;
 
     /////////////////////////////////////////////////////////////////
@@ -87,6 +86,21 @@ public class FPSPlayerController : PlayerController
 
 
     private float jumpDelta;
+    
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+
+    [SerializeField, FoldoutGroup("Audio"), ReadOnly]
+    private AudioSource audioSource;
+    
+    [SerializeField, FoldoutGroup("Audio")]
+    private WalkSoundScriptable walkingSounds;
+    
+    [SerializeField, FoldoutGroup("Audio")]
+    private float walkSoundDelay;
+
+    private float walkTimer;
 
     /////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
@@ -109,6 +123,7 @@ public class FPSPlayerController : PlayerController
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
         equipment = GetComponent<Equipment>();
+        audioSource = gameObject.AddComponent<AudioSource>();
 
         //Init default values
         startCameraRotation = playerCamera.localRotation;
@@ -127,6 +142,7 @@ public class FPSPlayerController : PlayerController
     protected virtual void LateUpdate()
     {
         onGround = IsOnGround();
+
     }
 
     private void FixedUpdate()
@@ -187,17 +203,30 @@ public class FPSPlayerController : PlayerController
         if (mLook == Vector2.zero)
             return;
 
+        var amount = lookMultiplier * mLook;
+        amount.y *= -1f;
+        
+        ApplyLookRotation(amount);
+
+    }
+
+    public void ApplyRecoil(Vector3 recoilAmount)
+    {
+        ApplyLookRotation(recoilAmount);
+    }
+
+    private void ApplyLookRotation(Vector3 rotationAmount)
+    {
         //Used for rotating the player on the transform Y Axis
-        Quaternion yRotation = rigidbody.rotation * Quaternion.Euler(0f, lookMultiplier * mLook.x, 0f);
+        Quaternion yRotation = rigidbody.rotation * Quaternion.Euler(0f, rotationAmount.x, 0f);
         rigidbody.rotation = yRotation;
 
 
         //Used for Rotating the player camera on its local X Axis
-        Quaternion xRotation = playerCamera.localRotation * Quaternion.Euler(lookMultiplier * mLook.y * -1f, 0f, 0f);
+        Quaternion xRotation = playerCamera.localRotation * Quaternion.Euler(rotationAmount.y, 0f, 0f);
 
         if (Quaternion.Angle(startCameraRotation, xRotation) < maxLookAngle)
             playerCamera.localRotation = xRotation;
-
     }
 
     void ProcessFalling()
@@ -237,12 +266,18 @@ public class FPSPlayerController : PlayerController
         }
 
         //I Want the crouching speed to override the running/walking speeds
-        if(isCrouching)
+        if (isCrouching)
+        {
             moveDelta = GetDirection() * crouchSpeed;
+            CheckPlayWalkSound(walkSoundDelay * 1.3f, Time.fixedDeltaTime);
+        }
         else
         {
             moveDelta = GetDirection() * (isRunning ? runSpeed : moveSpeed);
+            
+            CheckPlayWalkSound(walkSoundDelay * (isRunning ? 0.7f : 1f), Time.fixedDeltaTime);
         }
+        
     }
 
     protected override void Jump()
@@ -261,7 +296,10 @@ public class FPSPlayerController : PlayerController
 
     protected override void Fire()
     {
-       equipment.Fire(playerCamera.position, playerCamera.forward);
+        if (equipment.Fire(playerCamera.position, playerCamera.forward, audioSource))
+        {
+            ApplyRecoil(equipment.currentlyEquipped.GetRecoil());
+        }
        
        if (equipment.currentlyEquipped.repeatable == false)
            isFiring = false;
@@ -281,6 +319,24 @@ public class FPSPlayerController : PlayerController
     }
 
     #endregion //Controls
+
+    protected void CheckPlayWalkSound(float checkDelay, float deltaTime)
+    {
+        if (!onGround)
+            return;
+
+        if (walkTimer >= checkDelay)
+        {
+            walkTimer = 0f;
+            walkingSounds.PlayWalkingAudio(audioSource);
+        }
+        else
+        {
+            walkTimer += deltaTime;
+        }
+        
+        
+    }
 
     protected override bool IsOnGround()
     {

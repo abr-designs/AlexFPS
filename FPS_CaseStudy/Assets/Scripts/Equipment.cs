@@ -42,7 +42,8 @@ public class Equipment : MonoBehaviour, IUIUpdate
 			SpawnGun();
 			ammo.Add(currentlyEquipped.ammoID, 50);
 		}
-		
+
+		//We can just apply the audio source onto the player
 		UpdateUI();
 	}
 
@@ -98,7 +99,7 @@ public class Equipment : MonoBehaviour, IUIUpdate
 		//Need a coroutine to actually only play the animation for X amount of time
 	}
 
-	public void Fire(Vector3 position, Vector3 direction)
+	public bool Fire(Vector3 position, Vector3 direction, AudioSource audioSource)
 	{
 		//We need to check for all of the legality of shooting before we try to actually fire
 		if (currentlyEquipped)
@@ -106,16 +107,16 @@ public class Equipment : MonoBehaviour, IUIUpdate
 			if (!CanFire)
 			{
 				//Debug.LogError("Cant Fire");
-				return;
+				return false;
 			}
 
 			if (HasAmmo() == false)
 			{
 				Debug.LogError("No Ammo");
-				return;
+				return false;
 			}
             
-			currentlyEquipped.Fire(position, direction.normalized);
+			currentlyEquipped.Fire(position, direction.normalized, audioSource);
 			SpendAmmo();
 			lastFireTime = Time.time;
 			UpdateUI();
@@ -124,6 +125,8 @@ public class Equipment : MonoBehaviour, IUIUpdate
 			if(!flashing)
 				StartCoroutine(MuzzleFlashCoroutine(currentlyEquipped.muzzleFlashTime));
 		}
+
+		return true;
 	}
 
 	private void SpendAmmo()
