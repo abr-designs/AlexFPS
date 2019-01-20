@@ -51,16 +51,16 @@ public class Equipment : MonoBehaviour, IUIUpdate
 	{
 		if (currentlyEquipped == weapon)
 		{
-			ammo[currentlyEquipped.ammoID] += 25;
+			AddAmmo(25);
 		}
 		else
 		{
 			currentlyEquipped = weapon;
-			
-			if(ammo.ContainsKey(currentlyEquipped.ammoID) == false)
+
+			if (ammo.ContainsKey(currentlyEquipped.ammoID) == false)
 				ammo.Add(currentlyEquipped.ammoID, 50);
 			else
-				ammo[currentlyEquipped.ammoID] += 25;
+				AddAmmo(25);
 			
 			SpawnGun();
 		}
@@ -69,6 +69,12 @@ public class Equipment : MonoBehaviour, IUIUpdate
 		
 		//TODO If not already equipped, spawn new gun
 		
+		UpdateUI();
+	}
+
+	public void AddAmmo(int amount)
+	{
+		ammo[currentlyEquipped.ammoID] += amount;
 		UpdateUI();
 	}
 

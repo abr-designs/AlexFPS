@@ -244,11 +244,14 @@
             <e p="PlayerKillable.cs" t="Include" />
           </e>
           <e p="Pickups" t="Include">
-            <e p="GunPickupSpawner.cs" t="Include" />
+            <e p="AmmoPickup.cs" t="Include" />
             <e p="HealthPickup.cs" t="Include" />
             <e p="PickupArmour.cs" t="Include" />
             <e p="PickupBase.cs" t="Include" />
-            <e p="PickupSpawner.cs" t="Include" />
+            <e p="Spawner" t="Include">
+              <e p="GunPickupSpawner.cs" t="Include" />
+              <e p="PickupSpawner.cs" t="Include" />
+            </e>
             <e p="WeaponPickup.cs" t="Include" />
           </e>
           <e p="PlayerController" t="Include">
