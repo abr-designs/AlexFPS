@@ -25,6 +25,11 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
     
     [SerializeField, FoldoutGroup("Attack Properties"), Required]
     protected GameObject fireLinePrefab;
+    
+   // [SerializeField, FoldoutGroup("Pursuit Properties"), SuffixLabel("m", true)]
+   // protected float pursuitDistanceThreshold;
+    [SerializeField, FoldoutGroup("Pursuit Properties"), SuffixLabel("m/s", true)]
+    protected float pursuitRunSpeed;
 
     
     [FormerlySerializedAs("muzzleAudioSource")] [SerializeField, FoldoutGroup("Audio Properties")]
@@ -93,13 +98,24 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
             case STATE.WANDER:
                 //Pick a point between current location and max view distance
                 navMeshAgent.SetDestination((Vector3?) parameters ?? RandomNavmeshLocation(view.MaxViewDistance));
+                navMeshAgent.speed = speed;
                 break;
             case STATE.PURSUE:
-                //Pick a point between current location and max view distance
-                navMeshAgent.SetDestination(lastTargetPosition);
                 break;
             case STATE.ATTACK:
-                navMeshAgent.SetDestination(transform.position);
+                //TODO Instead of B-Lining it to the player, maybe the AI should find some cover
+                if (parameters != null)
+                {
+                    //Move towards the player while shooting
+                    var dir = (transform.position - (Vector3?) parameters).Value.normalized;
+                    var pos = (Vector3) parameters + dir * (view.MaxViewDistance / 2f);
+                    navMeshAgent.SetDestination(pos);
+                }
+                else
+                {
+                    navMeshAgent.SetDestination(transform.position);
+                }
+                navMeshAgent.speed = pursuitRunSpeed;
                 break;
             case STATE.DEAD:
                 break;
@@ -107,37 +123,51 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
                 throw new ArgumentOutOfRangeException();
         }
 
-        SetAnimationState();
+        //SetAnimationState();
     }
 
-    protected override void SetAnimationState()
-    {
-        animator.SetBool(parameterIds[0], false);
-        animator.SetBool(parameterIds[1], false);
-        animator.SetBool(parameterIds[2], false);
-        
-        switch (currentState)
-        {
-            case STATE.IDLE:
-                animator.SetBool(parameterIds[0], true);
-                break;
-            case STATE.PURSUE:
-            case STATE.WANDER:
-                animator.SetBool(parameterIds[1], true);
-                break;
-            case STATE.ATTACK:
-                animator.SetBool(parameterIds[2], true);
-                break;
-            case STATE.DEAD:
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(currentState.ToString());
-        }
-    }
+   protected override void SetAnimationState()
+   {
+       ////[0] Idle
+       ////[1] Running
+       ////[2] Shooting
+       //
+       //animator.SetBool(parameterIds[0], false);
+       ////animator.SetBool(parameterIds[1], false);
+       //animator.SetBool(parameterIds[2], false);
+       //
+       //switch (currentState)
+       //{
+       //    case STATE.IDLE:
+       //        animator.SetBool(parameterIds[0], true);
+       //        break;
+       //    case STATE.PURSUE:
+       //        //animator.SetBool(parameterIds[1], true);
+       //        animator.SetBool(parameterIds[2], true);
+       //        break;
+       //    case STATE.WANDER:
+       //        animator.SetBool(parameterIds[1], true);
+       //        break;
+       //    case STATE.ATTACK:
+       //        animator.SetBool(parameterIds[2], true);
+       //        break;
+       //    case STATE.DEAD:
+       //        break;
+       //    default:
+       //        throw new ArgumentOutOfRangeException(currentState.ToString());
+       //}
+   }
 
     private void LateUpdate()
     {
         view.CanSeeTargets(out activeTargets);
+     
+        ////[0] Idle
+        ////[1] Running
+        ////[2] Shooting
+        animator.SetBool(parameterIds[0], currentState == STATE.IDLE);
+        animator.SetBool(parameterIds[1], navMeshAgent.remainingDistance > 0.5f);
+        animator.SetBool(parameterIds[2], currentState == STATE.ATTACK);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -163,7 +193,7 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
     {
         if (activeTargets != null && activeTargets.Count > 0)
         {
-            InitState(STATE.ATTACK);
+            InitState(STATE.ATTACK, activeTargets[0].position);
             return;
         }
 
@@ -176,11 +206,7 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
 
     protected override void PursueState()
     {
-        if (navMeshAgent.remainingDistance < 0.2f)
-        {
-            InitState(STATE.IDLE);
-            return;
-        }
+
     }
 
     protected override void AttackState()
@@ -190,11 +216,22 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
         
         if (activeTargets == null || activeTargets.Count == 0)
         {
-            InitState(STATE.PURSUE);
+            InitState(STATE.WANDER, lastTargetPosition );
             return;
-        }
+        }     
 
         Vector3 lookAtTarget = lastTargetPosition = activeTargets[0].position;
+
+        if (Vector3.Distance(transform.position, lookAtTarget) > view.MaxViewDistance / 2f)
+        {
+            InitState(STATE.ATTACK, lookAtTarget);
+            return;
+        }
+        else if (navMeshAgent.remainingDistance < 0.2f)
+        {
+            //Pick Random location inside of the pursuit threshold
+            InitState(STATE.ATTACK, RandomNavmeshLocationAroundPosition(lookAtTarget, view.MaxViewDistance / 2f));
+        }
         
         var position = transform.position;
         lookAtTarget.y = position.y;
@@ -223,8 +260,12 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
     //Thanks to http://answers.unity.com/answers/1426690/view.html
     protected Vector3 RandomNavmeshLocation(float radius) 
     {
+        return RandomNavmeshLocationAroundPosition(transform.position, radius);
+    }
+    protected Vector3 RandomNavmeshLocationAroundPosition(Vector3 position, float radius) 
+    {
         Vector3 randomDirection = Random.insideUnitSphere * radius;
-        randomDirection += transform.position;
+        randomDirection += position;
         NavMeshHit hit;
         Vector3    finalPosition = Vector3.zero;
         if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1)) {
@@ -276,6 +317,20 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
     }
     
     #endregion //Animation Listeners
+    
+    
+    #region Editor Functions
+
+    private void OnDrawGizmos()
+    {
+        if (!Application.isPlaying)
+            return;
+        
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, navMeshAgent.destination);
+    }
+
+    #endregion //Editor Functions
 
     
 }

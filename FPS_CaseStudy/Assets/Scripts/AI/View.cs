@@ -56,6 +56,10 @@ public class View : MonoBehaviour
 		//For each target
 		for(int i = 0; i < targets.Length; i++)
 		{
+			//Dont want to check targets that aren't even active in game
+			if (!targets[i].gameObject.activeInHierarchy)
+				continue;
+			
 			//Loop through our View Profiles
 			for(int j = 0; j < viewProfiles.Length; j++)
 			{
