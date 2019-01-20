@@ -8,7 +8,9 @@ using UnityEngine.Serialization;
 public class KillableBase : MonoBehaviour
 {
 	public Action<Vector3> onHitCallback;
-	
+
+	public float Health => health;
+
 	protected Vector3    startPosition;
 	protected Quaternion startRotation;
 

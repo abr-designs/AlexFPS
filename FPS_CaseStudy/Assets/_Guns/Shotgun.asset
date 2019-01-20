@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01afc4e0aae1cb44bd2a58307590608, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  damage: 35
+  damage: 55
   range: 10
   accuracy: 2
   damageDropoff:

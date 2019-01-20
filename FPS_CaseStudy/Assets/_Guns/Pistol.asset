@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01afc4e0aae1cb44bd2a58307590608, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  damage: 15
+  damage: 10
   range: 25
   accuracy: 2
   damageDropoff:
@@ -41,7 +41,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   repeatable: 0
   recoilMin: {x: -1, y: -1, z: 0}
-  recoilMax: {x: 1, y: -3, z: 0}
+  recoilMax: {x: 1, y: -2, z: 0}
   ammoID: 2
   fireCooldown: 0.15
   muzzleFlashTime: 0.1

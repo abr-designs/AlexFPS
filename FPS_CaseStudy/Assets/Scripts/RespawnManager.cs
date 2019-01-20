@@ -19,8 +19,15 @@ public class RespawnManager : Singleton<RespawnManager>
 		if(killable.gameObject.activeInHierarchy == false)
 			yield break;
 
-		var o = killable.gameObject;
 		
+
+		var o = killable.gameObject;
+		var r = o.GetComponent<IRespawnable>();
+		
+		if ( r == null)
+			yield break;
+		
+		r.OnDespawn();
 		o.SetActive(false);
 
 		if (player)
@@ -47,5 +54,6 @@ public class RespawnManager : Singleton<RespawnManager>
 		UIManager.Instance.ShowRespawn(false, string.Empty);
 		killable.Reset();
 		o.SetActive(true);
+		r.OnRespawn();
 	}
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerKillable : KillableArmour, IUIUpdate
+public class PlayerKillable : KillableArmour, IUIUpdate, IRespawnable
 {
 	
 	
@@ -41,5 +41,14 @@ public class PlayerKillable : KillableArmour, IUIUpdate
 	{
 		base.Reset();
 		UpdateUI();
+	}
+
+	public void OnDespawn()
+	{
+		
+	}
+
+	public void OnRespawn()
+	{
 	}
 }

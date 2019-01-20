@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider)), RequireComponent(typeof(View)), RequireComponent(typeof(KillableBase)), RequireComponent(typeof(AudioSource))]
-public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
+public class EnemyAI : StateMachineBase,IRespawnable, IShootAnimation, IWalkAnimation
 {
     ////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +37,8 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
 
     [SerializeField, FoldoutGroup("Audio Properties"), Required]
     protected WalkSoundScriptable walkingSounds;
-    
+
+    protected KillableBase killableBase;
     
     private List<Transform> activeTargets;
     
@@ -67,7 +68,8 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
             parameterIds[i] = Animator.StringToHash(AnimationParameters[i]);
         }
 
-        GetComponent<KillableBase>().onHitCallback += Hit;
+        killableBase = GetComponent<KillableBase>();
+        killableBase.onHitCallback += Hit;
 
         //We assign the audio source, and then make sure that its 3D
         audioSource = gameObject.GetComponent<AudioSource>();
@@ -118,6 +120,9 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
                 navMeshAgent.speed = pursuitRunSpeed;
                 break;
             case STATE.DEAD:
+                navMeshAgent.enabled = false;
+                animator.enabled     = false;
+                enabled              = false;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -244,13 +249,20 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
 
     protected override void DeadState()
     {
-        throw new System.NotImplementedException();
+        
+        
     }
     
     #endregion //States
 
     void Hit(Vector3 fromPosition)
     {
+        if (killableBase.Health <= 0)
+        {
+            InitState(STATE.DEAD);
+            return;
+        }
+        
         if (currentState == STATE.ATTACK)
             return;
 
@@ -285,7 +297,7 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
 
     private void OnDestroy()
     {
-        GetComponent<KillableBase>().onHitCallback -= Hit;
+        killableBase.onHitCallback -= Hit;
     }
 
     #region Animation Listeners
@@ -332,5 +344,18 @@ public class EnemyAI : StateMachineBase, IShootAnimation, IWalkAnimation
 
     #endregion //Editor Functions
 
-    
+
+    public void OnDespawn()
+    {
+        
+    }
+
+    public void OnRespawn()
+    {
+        navMeshAgent.enabled = true;
+        animator.enabled     = true;
+        enabled              = true;
+        
+        InitState(STATE.IDLE);
+    }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01afc4e0aae1cb44bd2a58307590608, type: 3}
   m_Name: MachineGun
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 15
   range: 45
   accuracy: 2
   damageDropoff:
@@ -41,7 +41,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   repeatable: 1
   recoilMin: {x: -2, y: -1, z: 0}
-  recoilMax: {x: 2, y: -5, z: 0}
+  recoilMax: {x: 2, y: -3, z: 0}
   ammoID: 1
   fireCooldown: 0.15
   muzzleFlashTime: 0.15

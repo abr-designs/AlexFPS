@@ -238,10 +238,12 @@
             <e p="BulletTrail.cs" t="Include" />
             <e p="ScriptableGun.cs" t="Include" />
           </e>
+          <e p="IRespawnable.cs" t="Include" />
           <e p="Killable" t="Include">
             <e p="KillableArmour.cs" t="Include" />
             <e p="KillableBase.cs" t="Include" />
             <e p="PlayerKillable.cs" t="Include" />
+            <e p="StateMachineKillable.cs" t="Include" />
           </e>
           <e p="Pickups" t="Include">
             <e p="AmmoPickup.cs" t="Include" />

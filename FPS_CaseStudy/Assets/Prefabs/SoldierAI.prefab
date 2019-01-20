@@ -975,7 +975,7 @@ GameObject:
   - component: {fileID: 3624819929311153833}
   - component: {fileID: 319250668300697335}
   - component: {fileID: 1738791094182087881}
-  - component: {fileID: 9192461122939945803}
+  - component: {fileID: 1920702373084787982}
   - component: {fileID: 567678217269036137}
   - component: {fileID: 5001973779604734634}
   - component: {fileID: 5303534076662803902}
@@ -1025,8 +1025,13 @@ MonoBehaviour:
   worldTarget: {x: 0, y: 0, z: 0}
   animator: {fileID: 5001973779604734634}
   navMeshAgent: {fileID: 2964193887405066248}
+  accuracy: 0
   equippedGun: {fileID: 0}
   muzzlePointTransform: {fileID: 0}
+  fireLinePrefab: {fileID: 0}
+  pursuitRunSpeed: 0
+  audioSource: {fileID: 0}
+  walkingSounds: {fileID: 0}
 --- !u!114 &1738791094182087881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1048,7 +1053,7 @@ MonoBehaviour:
     viewAngle: 60.6
   ringColor: {r: 1, g: 1, b: 1, a: 1}
   viewAngleColor: {r: 0, g: 1, b: 0, a: 1}
---- !u!114 &9192461122939945803
+--- !u!114 &1920702373084787982
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1057,7 +1062,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8718697871824012429}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b76f8e54ea516945b749422541d12b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 33bc89c75444cf548a53dd3a813276d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
