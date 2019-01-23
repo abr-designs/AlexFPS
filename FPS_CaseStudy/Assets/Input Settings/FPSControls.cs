@@ -26,6 +26,7 @@ public class FPSControls : InputActionAssetReference
         m_Gameplay_Fire = m_Gameplay.GetAction("Fire");
         m_Gameplay_Sprint = m_Gameplay.GetAction("Sprint");
         m_Gameplay_Crouch = m_Gameplay.GetAction("Crouch");
+        m_Gameplay_Aim = m_Gameplay.GetAction("Aim");
         // Debugging
         m_Debugging = asset.GetActionMap("Debugging");
         m_Debugging_Pause = m_Debugging.GetAction("Pause");
@@ -41,6 +42,7 @@ public class FPSControls : InputActionAssetReference
         m_Gameplay_Fire = null;
         m_Gameplay_Sprint = null;
         m_Gameplay_Crouch = null;
+        m_Gameplay_Aim = null;
         m_Debugging = null;
         m_Debugging_Pause = null;
         m_Debugging_Time = null;
@@ -64,6 +66,7 @@ public class FPSControls : InputActionAssetReference
     private InputAction m_Gameplay_Fire;
     private InputAction m_Gameplay_Sprint;
     private InputAction m_Gameplay_Crouch;
+    private InputAction m_Gameplay_Aim;
     public struct GameplayActions
     {
         private FPSControls m_Wrapper;
@@ -74,6 +77,7 @@ public class FPSControls : InputActionAssetReference
         public InputAction @Fire { get { return m_Wrapper.m_Gameplay_Fire; } }
         public InputAction @Sprint { get { return m_Wrapper.m_Gameplay_Sprint; } }
         public InputAction @Crouch { get { return m_Wrapper.m_Gameplay_Crouch; } }
+        public InputAction @Aim { get { return m_Wrapper.m_Gameplay_Aim; } }
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }

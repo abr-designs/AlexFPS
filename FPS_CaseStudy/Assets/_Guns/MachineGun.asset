@@ -45,6 +45,7 @@ MonoBehaviour:
   ammoID: 1
   fireCooldown: 0.15
   muzzleFlashTime: 0.15
+  uiImage: {fileID: 21300044, guid: 6674e8c43c63e4f4184cbd009379498d, type: 3}
   gunPrefab: {fileID: 3521571962208821767, guid: 00c9fc9c2b999b64a9397d9d3ef340ff,
     type: 3}
   muzzleFlashPrefab: {fileID: 100002, guid: acade480ec18aed4d95a5abc17649351, type: 3}
@@ -52,3 +53,5 @@ MonoBehaviour:
   initialPositionOffset: {x: -0.15, y: -0.287, z: 0.77}
   initialRotationOffset: {x: 0, y: 0, z: 0}
   localMuzzleOffset: {x: -0.02, y: -0.01, z: 0.65}
+  aimingPositionOffset: {x: 0, y: -0.076, z: 0.77}
+  aimingRotationOffset: {x: 0, y: 0, z: 0}

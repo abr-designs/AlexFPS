@@ -34,6 +34,9 @@ public class ScriptableGun : ScriptableObject
    //public float reloadTime;
    //public int magazineSize;
 
+   [FoldoutGroup("UI"), Required] 
+   public Sprite uiImage;
+   
    [FoldoutGroup("Visuals")] 
    public GameObject gunPrefab;
 
@@ -48,9 +51,12 @@ public class ScriptableGun : ScriptableObject
    public Vector3 initialPositionOffset;
    [FoldoutGroup("Local Transform Information")]
    public Vector3 initialRotationOffset;
-   [FoldoutGroup("Local Transform Information")]
+   [FoldoutGroup("Local Transform Information"),Space]
    public Vector3 localMuzzleOffset;
-
+   [FoldoutGroup("Local Transform Information"),Space]
+   public Vector3 aimingPositionOffset;
+   [FoldoutGroup("Local Transform Information")]
+   public Vector3 aimingRotationOffset;
    
    public void Fire(Vector3 position, Vector3 direction, AudioSource audioSource)
    {

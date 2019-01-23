@@ -11,6 +11,7 @@ ScriptedImporter:
     11400012: Gameplay/Crouch
     11400014: Debugging/Pause
     11400016: Debugging/Time
+    11400018: Gameplay/Aim
   externalObjects: {}
   userData: 
   assetBundleName: 

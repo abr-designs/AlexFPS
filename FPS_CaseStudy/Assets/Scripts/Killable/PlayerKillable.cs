@@ -17,6 +17,7 @@ public class PlayerKillable : KillableArmour, IUIUpdate, IRespawnable
 	public override void ChangeHealth(float amount)
 	{
 		base.ChangeHealth(amount);
+		
 		UpdateUI();
 	}
 

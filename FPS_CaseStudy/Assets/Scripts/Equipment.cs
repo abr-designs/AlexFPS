@@ -135,6 +135,26 @@ public class Equipment : MonoBehaviour, IUIUpdate
 		return true;
 	}
 
+	public void Aim(bool state)
+	{
+		//TODO Do i need to adjust the camera perspective?
+		
+		//TODO Set gun to new location
+		//TODO Need to account for if i've picked up a gun while aiming
+		if (!state)
+		{
+			gunTransform.localPosition = currentlyEquipped.initialPositionOffset;
+			gunTransform.localRotation = Quaternion.Euler(currentlyEquipped.initialRotationOffset);
+			muzzleParticleTransform.position = MuzzlePosition;
+		}
+		else
+		{
+			gunTransform.localPosition = currentlyEquipped.aimingPositionOffset;
+			gunTransform.localRotation = Quaternion.Euler(currentlyEquipped.aimingRotationOffset);
+			muzzleParticleTransform.localPosition += currentlyEquipped.aimingPositionOffset - currentlyEquipped.initialPositionOffset;
+		}
+	}
+
 	private void SpendAmmo()
 	{
 		if (ammo.ContainsKey(currentlyEquipped.ammoID))
@@ -156,6 +176,8 @@ public class Equipment : MonoBehaviour, IUIUpdate
 	public void UpdateUI()
 	{
 		UIManager.Instance.SetAmmo(ammo[currentlyEquipped.ammoID]);
+		UIManager.Instance.SetGunSprite(currentlyEquipped.uiImage);
+
 	}
 
 	private bool flashing = false;

@@ -40,6 +40,12 @@
                     "id": "adfc1e08-ca30-403a-9b60-34d6270d6186",
                     "expectedControlLayout": "",
                     "bindings": []
+                },
+                {
+                    "name": "Aim",
+                    "id": "a6e8edc3-8ed6-4093-b261-f2ed501bbed2",
+                    "expectedControlLayout": "",
+                    "bindings": []
                 }
             ],
             "bindings": [
@@ -290,6 +296,30 @@
                     "processors": "",
                     "groups": "",
                     "action": "Crouch",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "right",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "chainWithPrevious": false,
+                    "isComposite": false,
+                    "isPartOfComposite": false,
+                    "modifiers": ""
+                },
+                {
+                    "name": "right",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
                     "chainWithPrevious": false,
                     "isComposite": false,
                     "isPartOfComposite": false,

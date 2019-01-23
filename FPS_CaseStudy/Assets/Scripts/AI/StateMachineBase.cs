@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 using UnityEngine.AI;
 using Object = UnityEngine.Object;
 
-
+[RequireComponent(typeof(Collider))]
 public abstract class StateMachineBase : MonoBehaviour
 {
     public enum STATE
@@ -19,10 +19,10 @@ public abstract class StateMachineBase : MonoBehaviour
         DEAD
     }
 
-    [SerializeField]
+    [SerializeField, FoldoutGroup("General Properties")]
     protected STATE currentState = STATE.IDLE;
     
-    [SerializeField]
+    [SerializeField, FoldoutGroup("General Properties")]
     protected View view;
 
     [SerializeField, FoldoutGroup("Idle Properties"), SuffixLabel("s", true)]
@@ -44,7 +44,8 @@ public abstract class StateMachineBase : MonoBehaviour
     protected NavMeshAgent navMeshAgent;
 
     protected string startingName;
-    
+
+    protected new Collider collider;
     protected new Transform transform;
     
     
@@ -52,8 +53,11 @@ public abstract class StateMachineBase : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        transform = gameObject.transform;
-        startingName = gameObject.name;
+        GameObject o = gameObject;
+
+        transform = o.transform;
+        collider = o.GetComponent<Collider>();
+        startingName = o.name;
         
         Init();
     }

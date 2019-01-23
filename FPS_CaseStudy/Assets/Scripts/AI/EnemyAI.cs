@@ -7,9 +7,17 @@ using UnityEngine.AI;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider)), RequireComponent(typeof(View)), RequireComponent(typeof(KillableBase)), RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(View)), RequireComponent(typeof(KillableBase)), RequireComponent(typeof(AudioSource))]
 public class EnemyAI : StateMachineBase,IRespawnable, IShootAnimation, IWalkAnimation
 {
+    
+    [SerializeField, FoldoutGroup("General Properties")]
+    protected bool usesRagdoll;
+
+    protected Rigidbody[] rigidbodies;
+    protected Collider[] colliders;
+    
+    
     ////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////
@@ -73,11 +81,10 @@ public class EnemyAI : StateMachineBase,IRespawnable, IShootAnimation, IWalkAnim
 
         //We assign the audio source, and then make sure that its 3D
         audioSource = gameObject.GetComponent<AudioSource>();
-        //audioSource.spatialBlend = 1f;
-        //audioSource.rolloffMode = AudioRolloffMode.Logarithmic;
-        //audioSource.minDistance = 3f;
-        //audioSource.maxDistance = 10f;
-        //audioSource.spatialize = true;
+
+        InitRagdoll();
+        
+        SetRagdollGravity(false);
         
         InitState(STATE.IDLE);
     }
@@ -117,12 +124,18 @@ public class EnemyAI : StateMachineBase,IRespawnable, IShootAnimation, IWalkAnim
                 {
                     navMeshAgent.SetDestination(transform.position);
                 }
+
                 navMeshAgent.speed = pursuitRunSpeed;
                 break;
             case STATE.DEAD:
+
+                collider.enabled     = false;
                 navMeshAgent.enabled = false;
                 animator.enabled     = false;
                 enabled              = false;
+                
+                SetRagdollGravity(true);
+
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -131,36 +144,10 @@ public class EnemyAI : StateMachineBase,IRespawnable, IShootAnimation, IWalkAnim
         //SetAnimationState();
     }
 
+    [Obsolete]
    protected override void SetAnimationState()
    {
-       ////[0] Idle
-       ////[1] Running
-       ////[2] Shooting
-       //
-       //animator.SetBool(parameterIds[0], false);
-       ////animator.SetBool(parameterIds[1], false);
-       //animator.SetBool(parameterIds[2], false);
-       //
-       //switch (currentState)
-       //{
-       //    case STATE.IDLE:
-       //        animator.SetBool(parameterIds[0], true);
-       //        break;
-       //    case STATE.PURSUE:
-       //        //animator.SetBool(parameterIds[1], true);
-       //        animator.SetBool(parameterIds[2], true);
-       //        break;
-       //    case STATE.WANDER:
-       //        animator.SetBool(parameterIds[1], true);
-       //        break;
-       //    case STATE.ATTACK:
-       //        animator.SetBool(parameterIds[2], true);
-       //        break;
-       //    case STATE.DEAD:
-       //        break;
-       //    default:
-       //        throw new ArgumentOutOfRangeException(currentState.ToString());
-       //}
+
    }
 
     private void LateUpdate()
@@ -295,6 +282,37 @@ public class EnemyAI : StateMachineBase,IRespawnable, IShootAnimation, IWalkAnim
         return position;
     }
 
+    protected void InitRagdoll()
+    {
+        if (!usesRagdoll)
+            return;
+        
+        rigidbodies = GetComponentsInChildren<Rigidbody>();
+        colliders = GetComponentsInChildren<Collider>();
+
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            for (int j = 0; j < colliders.Length; j++)
+            {
+                //Avoid ignore itself
+                if (colliders[i] == colliders[j])
+                    continue;
+                
+                Physics.IgnoreCollision(colliders[i], colliders[j]);
+            }
+        }
+    }
+    protected void SetRagdollGravity(bool state)
+    {
+        if (!usesRagdoll) 
+            return;
+        
+        foreach (var rb in rigidbodies)
+        {
+            rb.useGravity = state;
+        }
+    }
+
     private void OnDestroy()
     {
         killableBase.onHitCallback -= Hit;
@@ -344,7 +362,8 @@ public class EnemyAI : StateMachineBase,IRespawnable, IShootAnimation, IWalkAnim
 
     #endregion //Editor Functions
 
-
+    #region Respawn & Despawn
+    
     public void OnDespawn()
     {
         
@@ -352,10 +371,14 @@ public class EnemyAI : StateMachineBase,IRespawnable, IShootAnimation, IWalkAnim
 
     public void OnRespawn()
     {
+        SetRagdollGravity(false);
+        
+        collider.enabled = true;
         navMeshAgent.enabled = true;
         animator.enabled     = true;
         enabled              = true;
         
         InitState(STATE.IDLE);
     }
+    #endregion Respawn & Despawn
 }

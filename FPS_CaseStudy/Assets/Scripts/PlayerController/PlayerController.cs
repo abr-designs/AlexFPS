@@ -10,6 +10,9 @@ public abstract class PlayerController : MonoBehaviour
     [SerializeField]
     protected FPSControls test;
 
+    [SerializeField, Required] 
+    protected Camera camera;
+
     [SerializeField,ReadOnly,FoldoutGroup("Information")]
     protected Vector2 mMove;
     [SerializeField,ReadOnly,FoldoutGroup("Information")]
@@ -43,6 +46,8 @@ public abstract class PlayerController : MonoBehaviour
     protected abstract void Jump();
 
     protected abstract void Fire();
+
+    protected abstract void Aim();
 
     protected abstract void Reload();
 

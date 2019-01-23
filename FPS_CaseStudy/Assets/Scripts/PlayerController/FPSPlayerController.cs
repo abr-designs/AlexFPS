@@ -2,7 +2,6 @@
 using System.Collections;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEditor.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody)), RequireComponent(typeof(Collider))]
 public class FPSPlayerController : PlayerController
@@ -40,6 +39,8 @@ public class FPSPlayerController : PlayerController
     
     [SerializeField, Sirenix.OdinInspector.ReadOnly, FoldoutGroup("Information")]
     private bool isFiring = false;
+    [SerializeField, Sirenix.OdinInspector.ReadOnly, FoldoutGroup("Information")]
+    private bool isAiming = false;
 
     /////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////
@@ -73,6 +74,16 @@ public class FPSPlayerController : PlayerController
 
     [SerializeField, FoldoutGroup("Looking")]
     private float maxLookAngle = 90f;
+
+   [SerializeField, FoldoutGroup("Aiming")]
+    private float defaultFieldofView;
+    [SerializeField, FoldoutGroup("Aiming")]
+    private float aimingFieldOfView;
+    
+    [SerializeField, FoldoutGroup("Aiming"), Range(1f, 0.01f)]
+    private float aimingSpeedDampener;
+    [SerializeField, FoldoutGroup("Aiming"), Range(1f, 0.01f)]
+    private float aimingRecoilDampener;
 
     private Vector3 startCameraLocation;
     private Quaternion startCameraRotation;
@@ -173,6 +184,13 @@ public class FPSPlayerController : PlayerController
         
         test.Gameplay.Fire.Enable();
         test.Gameplay.Fire.performed += ctx => { isFiring = ctx.ReadValue<float>() == 1f; };
+        
+        test.Gameplay.Aim.Enable();
+        test.Gameplay.Aim.performed += ctx =>
+        {
+            isAiming = ctx.ReadValue<float>() == 1f;
+            Aim();
+        };
         //test.Gameplay.Fire.performed += ctx => Fire();
 
         test.Gameplay.Sprint.Enable();
@@ -212,7 +230,7 @@ public class FPSPlayerController : PlayerController
 
     public void ApplyRecoil(Vector3 recoilAmount)
     {
-        ApplyLookRotation(recoilAmount);
+        ApplyLookRotation(recoilAmount * (isAiming ? aimingRecoilDampener : 1f));
     }
 
     private void ApplyLookRotation(Vector3 rotationAmount)
@@ -273,7 +291,7 @@ public class FPSPlayerController : PlayerController
         }
         else
         {
-            moveDelta = GetDirection() * (isRunning ? runSpeed : moveSpeed);
+            moveDelta = GetDirection() * (isRunning ? runSpeed : moveSpeed) * (isAiming ? aimingSpeedDampener : 1f);
             
             CheckPlayWalkSound(walkSoundDelay * (isRunning ? 0.7f : 1f), Time.fixedDeltaTime);
         }
@@ -306,11 +324,19 @@ public class FPSPlayerController : PlayerController
        
     }
 
+    protected override void Aim()
+    {
+        equipment.Aim(isAiming);
+
+        camera.fieldOfView = isAiming ? aimingFieldOfView : defaultFieldofView;
+    }
+
     protected override void Reload()
     {
         throw new System.NotImplementedException();
     }
 
+    //FIXME This needs to be adjusted because the standing back up for the camera does not work
     protected virtual void Crouch(float value)
     {
         isCrouching = value == 1;
