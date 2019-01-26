@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97af99118eac3fa4f94e9bd14947cad0, type: 3}
+  m_Name: Metal
+  m_EditorClassIdentifier: 
+  createBulletHole: 0
+  bulletHolePrefab: {fileID: 0}
+  bulletStrikeParticlePrefab: {fileID: 100002, guid: e74af37e539075d428c1f7bd8cdb781d,
+    type: 3}
+  volume: 1
+  impactAudioClips:
+  - {fileID: 8300000, guid: b47653d68118ecb4c8c65ca1c43f1dd2, type: 3}
+  - {fileID: 8300000, guid: a376f977b9e4c1e409af2c78c593f111, type: 3}
+  - {fileID: 8300000, guid: 9a78942d02888ea46b66c48f7045aeb6, type: 3}
+  - {fileID: 8300000, guid: 1f1c7720f4c61a143bd88b9177918ff8, type: 3}
+  - {fileID: 8300000, guid: c946cf2a3cb03df4a8656ea38b85405a, type: 3}
+  - {fileID: 8300000, guid: 550137ab10c18154d8b5708bbcee97f9, type: 3}
+  - {fileID: 8300000, guid: b7ccd4d45ca5b41428ecc0edb9297364, type: 3}
+  - {fileID: 8300000, guid: 34e6f8bc121056e46953b588f0f455e2, type: 3}

@@ -40,12 +40,14 @@ public abstract class StateMachineBase : MonoBehaviour
     [SerializeField, FoldoutGroup("Animation Properties"), Required]
     protected Animator animator;
     
-    [SerializeField, FoldoutGroup("Navigation Properties"), Required]
-    protected NavMeshAgent navMeshAgent;
+    //[SerializeField, FoldoutGroup("Navigation Properties"), Required]
+    //protected NavMeshAgent navMeshAgent;
 
     protected string startingName;
 
     protected new Collider collider;
+    
+    [SerializeField, FoldoutGroup("General Properties")]
     protected new Transform transform;
     
     
@@ -55,7 +57,9 @@ public abstract class StateMachineBase : MonoBehaviour
     {
         GameObject o = gameObject;
 
-        transform = o.transform;
+        if(transform == null)
+            transform = o.transform;
+        
         collider = o.GetComponent<Collider>();
         startingName = o.name;
         
